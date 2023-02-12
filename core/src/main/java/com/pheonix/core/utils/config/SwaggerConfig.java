@@ -29,6 +29,6 @@ public class SwaggerConfig {
 
     private ApiInfo metaInfo() {
         return new ApiInfo("Phoenix Core Service", "This is the core service application", "1.0", "Terms of Service", new Contact("Phoenix", "Phoenix-Rising from the Ashes", "ayushsurana2018@gmail.com"),
-                "Car scan", "https://www.carscan.ai/", Collections.emptyList());
+                "ServApp", "https://www.servapp.com", Collections.emptyList());
     }
 }

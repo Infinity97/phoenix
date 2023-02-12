@@ -1,16 +1,16 @@
 package com.pheonix.user.management.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity(name = "USER_AUTH_SESSION")
 @Table(name = "USERS_AUTH_SESSION")
 @Builder
@@ -23,7 +23,7 @@ public class UserAuthSession extends BaseEntity implements java.io.Serializable 
     private String id;
 
     @JoinColumn(name = "USER_ID")
-    @OneToOne
+    @ManyToOne
     private Users users;
 
     @Column(name = "EXPIRY_TIMESTAMP")

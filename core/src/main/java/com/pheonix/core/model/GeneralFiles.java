@@ -1,30 +1,41 @@
 package com.pheonix.core.model;
 
+import com.pheonix.core.utils.enums.FileType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
 @Entity
 @Table(name = "GENERAL_FILES")
-@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Data
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GeneralFiles extends BaseEntity implements java.io.Serializable {
 
     @Id
-    @Column(name = "ID", length = 50)
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(name = "ID", columnDefinition = "VARCHAR(255)", unique = true, nullable = false)
     private String id;
+
     @Column(name = "FILE_NAME", length = 100)
     private String fileName;
-    @Column(name = "TYPE", length = 50)
-    private String type;
-    @Column(name = "PUBLIC_PATH")
-    private String publicPath;
 
+    @Column(name = "TYPE")
+    @Enumerated(EnumType.STRING)
+    private FileType type;
+
+    @Column(name = "CONTEXT_ID")
+    private String contextId;
+
+    @Column(name = "FULL_PATH")
+    private String fullPath;
+
+    @Column(name = "BUCKET_NAME")
+    private String bucketName;
 }
 

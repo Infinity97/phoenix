@@ -1,13 +1,10 @@
 package com.pheonix.user.management.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
@@ -33,7 +30,7 @@ public abstract class BaseEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @Column(name = "DELETED", nullable = false, columnDefinition = "TINYINT(1) NULL DEFAULT '0'")
+    @Column(name = "DELETED", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     @JsonIgnore
     private boolean deleted;
 

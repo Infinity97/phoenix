@@ -1,14 +1,24 @@
 package com.pheonix.user.management.dto;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
+@Getter
 public enum ApiResponseStatus {
+
     // All the Success Messages to be displayed here with Code 1000
     SUCCESS(1000, "Success"),
 
-    // All the Failure Messages to be displayed here with Code other than 1000
+    /**
+     * All the Failure Messages to be displayed here with Code other than 1000
+     */
     FAILURE(1001,"Failure"),
     INCOMPLETE_OR_INCORRECT_REQUEST(1001,"FATAL ERROR: Some information in request is missing"),
+
+    // Unauthorized Errors
+    UNAUTHORIZED(1111, "Unauthorized", HttpStatus.UNAUTHORIZED),
+    INVALID_SESSION_ID(1111,"Session Id is invalid", HttpStatus.UNAUTHORIZED),
 
     // Login related Errors
     USER_NOT_AVAILABLE(1002, "User is Not Available"),
@@ -17,7 +27,9 @@ public enum ApiResponseStatus {
     INVALID_PASSWORD(1002,"Invalid Password"),
     INCORRECT_PASSWORD(1002,"Incorrect Password"),
     LOGIN_TYPE_NOT_MENTIONED(1002,"Login Type is not mentioned"),
-	EMAIL_NOT_PRESENT(1002, "Email Id Is Not Present"),
+	  EMAIL_NOT_PRESENT(1002, "Email Id Is Not Present"),
+    COUNTRY_NOT_PRESENT(1002,"Country Not found"),
+    CONTEXT_TYPE_NOT_PRESENT(1002,"Incorrect User Type"),
 
 	//Seller Related Errors
     SELLER_NOT_AVAILABLE(1002,"Seller is not available"),
@@ -47,11 +59,19 @@ public enum ApiResponseStatus {
     NOT_A_VALID_QUANTITY(1005,"Please enter a valid quantity");
 
 	private int code;
-    private String message;
+  private String message;
+  private HttpStatus httpStatus;
 
     ApiResponseStatus(int code, String message){
         this.code =code;
         this.message = message;
+    }
+
+
+    ApiResponseStatus(int code, String message, HttpStatus httpStatus){
+        this.code =code;
+        this.message = message;
+        this.httpStatus = httpStatus;
     }
 
     @JsonValue
@@ -61,4 +81,5 @@ public enum ApiResponseStatus {
         apiResponseStatusToJson.setMessage(this.message);
         return apiResponseStatusToJson;
     }
+
 }

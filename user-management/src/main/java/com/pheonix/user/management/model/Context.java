@@ -8,8 +8,11 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "CONTEXT")
-@Data
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Context extends BaseEntity implements java.io.Serializable {
 
     @Id
@@ -18,11 +21,16 @@ public class Context extends BaseEntity implements java.io.Serializable {
     @Column(name = "ID", columnDefinition = "VARCHAR(255)", unique = true, nullable = false)
     private String id;
 
-    @Column(nullable = false, name = "name")
+    /**
+     * For normal Users it is going to save user id.
+     * For Company Users it is going to save the company ids stored in core.
+     * For Service Providers it is going to save service Provider Ids stored in core.
+     */
+    @Column(nullable = false, name = "NAME")
     private String name;
 
-    @JoinColumn(name = "user_id")
-    @OneToOne
-    private Users users;
+    @JoinColumn(name = "TYPE_ID")
+    @ManyToOne
+    private ContextType type;
 
 }

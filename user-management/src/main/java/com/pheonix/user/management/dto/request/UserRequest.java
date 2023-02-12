@@ -1,11 +1,15 @@
 package com.pheonix.user.management.dto.request;
 
-import com.pheonix.user.management.dto.pojo.UsersPojo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pheonix.user.management.dto.pojo.UsersVo;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-@SuperBuilder
-public class UserRequest extends UsersPojo {
+@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class UserRequest extends UsersVo {
+	String userType;
 }

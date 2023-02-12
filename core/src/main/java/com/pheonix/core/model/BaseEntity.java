@@ -1,11 +1,10 @@
 package com.pheonix.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
@@ -19,9 +18,8 @@ import java.time.LocalDateTime;
 
 @Data
 @MappedSuperclass
-@TypeDefs({
-        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-})
+@SuperBuilder
+@NoArgsConstructor
 public abstract class BaseEntity {
 
     @Column(name = "CREATED_AT", updatable = false)
@@ -32,7 +30,7 @@ public abstract class BaseEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @Column(name = "DELETED", nullable = false, columnDefinition = "TINYINT(1) NULL DEFAULT '0'")
+    @Column(name = "DELETED", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     @JsonIgnore
     private boolean deleted;
 

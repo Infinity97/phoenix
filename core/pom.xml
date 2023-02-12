@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.12</version>
+			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -53,17 +53,44 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>
 			<version>0.3m</version>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.vladmihalcea</groupId>-->
+<!--			<artifactId>hibernate-types-52</artifactId>-->
+<!--			<version>2.9.11</version>-->
+<!--		</dependency>-->
 		<dependency>
-			<groupId>com.vladmihalcea</groupId>
-			<artifactId>hibernate-types-52</artifactId>
-			<version>2.9.11</version>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.931</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.1</version>
 		</dependency>
 	</dependencies>
-
 
 
 	<build>
@@ -71,6 +98,31 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>migrate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<driver>org.postgresql.Driver</driver>
+					<url>jdbc:postgresql://localhost:5432/usermanagement</url>
+					<user>postgres</user>
+					<password>root</password>
+					<baselineOnMigrate>true</baselineOnMigrate>
+					<schemas>public</schemas>
+					<locations>
+						<location>
+							filesystem:src/main/resources/db/migration
+						</location>
+					</locations>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

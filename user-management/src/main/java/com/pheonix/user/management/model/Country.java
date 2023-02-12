@@ -1,7 +1,6 @@
 package com.pheonix.user.management.model;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
@@ -10,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "COUNTRY_MSTR")
 @Data
 @Builder
-public class Country extends BaseEntity {
+public class Country extends BaseEntity implements java.io.Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

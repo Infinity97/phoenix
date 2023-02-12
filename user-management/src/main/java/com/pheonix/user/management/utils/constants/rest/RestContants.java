@@ -4,13 +4,30 @@ public interface RestContants {
     
     String ADMIN = "/admin";
     String MOBILE = "/mobile";
+    String SESSION_ID ="sessionId";
+    String AUTH_USERNAME = "authUsername";
+    String AUTH_PASSWORD = "authPassword";
+
+    interface SESSION{
+        String SESSION = "/session";
+    }
 
     interface LOGIN {
         String LOGIN = "/login";
         String REGISTER_NEW_USER = "/registerNewUser";
         String FORGOT_PASSWORD = "/forgotPassword";
-        String UPDATE_USER_DETAILS = "/updateUserDetails";
         String LOGIN_OR_SIGN_UP = "/loginOrSignUp";
+        String AUTH = "/auth";
+        String VALIDATE_SESSION = "/validateSession";
+        String CREATE_SESSION = "/createSession";
+    }
+
+    interface USER {
+        String USER = "/user";
+        String ADD_ADDRESS_DETAILS = "/addAddressDetails";
+        String UPDATE = "/update";
+        String GET = "/get";
+
     }
 
     interface PRODUCT {
