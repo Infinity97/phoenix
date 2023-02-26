@@ -50,6 +50,10 @@ public class MapperUtil{
 		return generalFileVo;
 	}
 
+	public List<GeneralFileVo> convertFileToList(List<GeneralFiles> files){
+		return files.stream().map(this::map).toList();
+	}
+
 	public BrandVo map(Brand brand){
 		ModelMapper modelMapper = new ModelMapper();
 		TypeMap<Brand, BrandVo> mapper = modelMapper.createTypeMap(Brand.class,BrandVo.class);

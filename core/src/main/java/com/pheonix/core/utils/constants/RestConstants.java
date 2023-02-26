@@ -25,6 +25,7 @@ public class RestConstants {
 
 	public static final String FILES = "/files";
 	public static final String UPLOAD_FILE = "/uploadFile";
+	public static final String GET_IMAGES = "/getImages";
 
 	public static final String CORE = "/core";
 	public static final String POPULATE_DATA = "/populateData";

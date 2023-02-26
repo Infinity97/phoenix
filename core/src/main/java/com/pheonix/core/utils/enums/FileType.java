@@ -13,7 +13,14 @@ public enum FileType {
     /**
      * File Type with default bucket name of -> aws.s3.bucket.default
      */
-    LOGO_CATEGORY(AppConstants.CATEGORY), LOGO_BRAND(AppConstants.BRAND), PRODUCT(AppConstants.PRODUCT), BILL(AppConstants.DEVICE), WARRANTY(AppConstants.DEVICE), DEVICE(AppConstants.DEVICE);
+    LOGO_CATEGORY(AppConstants.CATEGORY),
+    LOGO_BRAND(AppConstants.BRAND),
+    PRODUCT(AppConstants.PRODUCT),
+    BILL(AppConstants.DEVICE),
+    WARRANTY(AppConstants.DEVICE),
+    DEVICE(AppConstants.DEVICE),
+    HOME(AppConstants.GENERIC),
+    ;
 
     private String tableMappedTo;
 

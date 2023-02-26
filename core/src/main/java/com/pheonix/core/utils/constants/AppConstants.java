@@ -17,5 +17,7 @@ public class AppConstants {
 	public static final String COMPANY = "COMPANY";
 	public static final String CATEGORY = "CATEGORY";
 	public static final String REPAIRERS = "REPAIRERS";
+	public static final String GENERIC = "GENERIC";
+
 
 }

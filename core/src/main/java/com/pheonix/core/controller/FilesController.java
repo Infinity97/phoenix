@@ -1,18 +1,21 @@
 package com.pheonix.core.controller;
 
 import com.pheonix.core.dto.ApiResponse;
+import com.pheonix.core.dto.request.GetImageRequest;
 import com.pheonix.core.dto.request.UploadFileRequest;
 import com.pheonix.core.dto.vo.GeneralFileVo;
 import com.pheonix.core.service.IFileService;
 import com.pheonix.core.utils.constants.RestConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -25,6 +28,11 @@ public class FilesController {
 	@PostMapping(value = RestConstants.UPLOAD_FILE)
 	public ApiResponse<GeneralFileVo> uploadFile(@Valid @RequestBody UploadFileRequest fileRequest)throws Exception{
 		return new ApiResponse<>(fileService.uploadFile(fileRequest));
+	}
+
+	@GetMapping(value = RestConstants.GET_IMAGES)
+	public ApiResponse<List<GeneralFileVo>> getImages(@RequestBody GetImageRequest getImageRequest){
+		return new ApiResponse<>(fileService.getImages(getImageRequest));
 	}
 
 }

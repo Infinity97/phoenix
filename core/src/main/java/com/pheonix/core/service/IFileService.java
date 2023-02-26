@@ -1,5 +1,6 @@
 package com.pheonix.core.service;
 
+import com.pheonix.core.dto.request.GetImageRequest;
 import com.pheonix.core.dto.request.UploadFileRequest;
 import com.pheonix.core.dto.response.FileTypeResponse;
 import com.pheonix.core.dto.vo.GeneralFileVo;
@@ -14,6 +15,7 @@ public interface IFileService {
 	GeneralFileVo uploadFile(UploadFileRequest fileRequest)throws IllegalStateException;
 	GeneralFileVo saveGeneralFile(GeneralFiles files);
 	Map<FileType, List<GeneralFiles>> getFilesByFileType(String contextId, String tableName);
+	List<GeneralFileVo> getImages(GetImageRequest getImageRequest);
 
 
 }

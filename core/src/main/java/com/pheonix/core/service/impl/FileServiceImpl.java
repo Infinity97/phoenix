@@ -3,6 +3,7 @@ package com.pheonix.core.service.impl;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.pheonix.core.dto.request.GetImageRequest;
 import com.pheonix.core.dto.request.UploadFileRequest;
 import com.pheonix.core.dto.vo.GeneralFileVo;
 import com.pheonix.core.model.GeneralFiles;
@@ -19,6 +20,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -68,5 +70,12 @@ public class FileServiceImpl implements IFileService {
 	public Map<FileType, List<GeneralFiles>> getFilesByFileType(String contextId, String tableName) {
 		return filesDao.findByContextId(contextId).stream().filter(files -> files.getType().getTableMappedTo().equalsIgnoreCase(tableName)).toList()
 			.stream().collect(Collectors.groupingBy(GeneralFiles::getType));
+	}
+
+	@Override
+	public List<GeneralFileVo> getImages(GetImageRequest getImageRequest) {
+		if(getImageRequest.getFileType() == FileType.HOME)
+			return mapperUtil.convertFileToList(filesDao.findByType(getImageRequest.getFileType()));
+		return Collections.emptyList();
 	}
 }
