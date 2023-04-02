@@ -85,10 +85,10 @@ public class AuthEnforcerInterceptor implements HandlerInterceptor {
 //                    userSessionVO.setContextType(contextType);
                     return true;
                 }
-                throw new PheonixException(ApiResponseStatus.UNAUTHORIZED, HttpStatus.BAD_REQUEST);
+                throw new PheonixException(ApiResponseStatus.UNAUTHORIZED);
             }
             else
-                throw new PheonixException(ApiResponseStatus.UNAUTHORIZED, HttpStatus.BAD_REQUEST);
+                throw new PheonixException(ApiResponseStatus.UNAUTHORIZED);
         }
         return true;
     }

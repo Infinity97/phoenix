@@ -17,7 +17,7 @@ public class MVCConfig implements WebMvcConfigurer {
 
     private final AuthEnforcerInterceptor authEnforcerInterceptor;
 
-    List<String> pathsForAuthFilterCheck  = Arrays.asList(RestConstants.DEVICE + "/**");
+    List<String> pathsForAuthFilterCheck  = Arrays.asList(RestConstants.PURCHASE + "/**", RestConstants.FILES + "/**");
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

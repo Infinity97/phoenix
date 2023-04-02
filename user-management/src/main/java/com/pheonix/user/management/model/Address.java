@@ -49,6 +49,9 @@ public class Address extends BaseEntity {
 	@Column(name = "NICKNAME")
 	private String nickname;
 
+	@Column(name = "LANDMARK")
+	private String landmark;
+
 	@JoinColumn(name = "USER_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Users users;

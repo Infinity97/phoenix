@@ -24,39 +24,17 @@ public enum ApiResponseStatus {
     USER_NOT_AVAILABLE(1002, "User is Not Available"),
     USER_ALREADY_REGISTERED(1002, "User Already Registered"),
     MOBILE_NUMBER_NOT_ENTERED(1002, "Mobile Number Not Entered"),
-    INVALID_PASSWORD(1002,"Invalid Password"),
-    INCORRECT_PASSWORD(1002,"Incorrect Password"),
-    LOGIN_TYPE_NOT_MENTIONED(1002,"Login Type is not mentioned"),
-	  EMAIL_NOT_PRESENT(1002, "Email Id Is Not Present"),
-    COUNTRY_NOT_PRESENT(1002,"Country Not found"),
-    CONTEXT_TYPE_NOT_PRESENT(1002,"Incorrect User Type"),
+    INVALID_PASSWORD(1003,"Invalid Password"),
+    INCORRECT_PASSWORD(1003,"Incorrect Password"),
+    LOGIN_TYPE_NOT_MENTIONED(1004,"Login Type is not mentioned"),
+	  EMAIL_NOT_PRESENT(1004, "Email Id Is Not Present"),
+    COUNTRY_NOT_PRESENT(1004,"Country Not found"),
+    CONTEXT_TYPE_NOT_PRESENT(1004,"Incorrect User Type"),
+    ADDRESS_DOES_NOT_EXIST(1005,"Address Entered is incorrect"),
+    MINIMUM_ONE_ADDRESS_MANDATORY(1006,"Sorry! Cannot Delete as at least one address is mandatory"),
 
-	//Seller Related Errors
-    SELLER_NOT_AVAILABLE(1002,"Seller is not available"),
+    ;
 
-    //Product Detail Related Errors
-    PRODUCT_NAME_NOT_ENTERED(1003, "Product name is not entered"),
-    PRODUCT_DOES_NOT_EXIST(1003, "Product does not exist"),
-    PRODUCT_ALREADY_EXIST(1003, "Product already exist"),
-    COMPANY_NOT_ENTERED(1003, "Company name is not entered"),
-    COMPANY_DOEST_NOT_EXIST(1003, "Company does not exist"),
-    COMPANY_ALREADY_EXIST(1003,"Company already exist"),
-    CATEGORY_DOES_NOT_EXIST(1003, "Category Does Not Exist"),
-    PARENT_CATEGORY_DOES_NOT_EXIST(1003, "Parent Category Does Not Exist"),
-    CATEGORY_NOT_ENTERED(1003, "Category is not entered"),
-    CATEGORY_ALREADY_EXIST(1003, "Category Already exists"),
-
-    //Review Related Errors
-    REVIEW_DOES_NOT_EXIST(1004,"Review Does Not Exist"),
-    NOT_VALID_RATING(1004, " Not a Valid Rating"),
-
-
-    //Cart related Errors
-    CART_DOES_NOT_EXIST(1005,"Cart does not exist"),
-    CART_DETAIL_NOT_PRESENT_IN_CART(1005,"Cart detail is not associated to the same cart"),
-    CART_DETAIL_DOES_NOT_EXIST(1005,"Cart detail does not exist"),
-    CART_IS_EMPTY(1005,"Cart is empty"),
-    NOT_A_VALID_QUANTITY(1005,"Please enter a valid quantity");
 
 	private int code;
   private String message;

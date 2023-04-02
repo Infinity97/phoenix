@@ -26,7 +26,7 @@ public class Brand extends BaseEntity{
 	private String name;
 
 	@JoinColumn(name = "LOGO")
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	private GeneralFiles logo;
 
 	//This field will be populated if a brand is associated with us and is mapped to a company that is onboarded with us.

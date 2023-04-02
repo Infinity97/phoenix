@@ -28,4 +28,7 @@ public class Category extends BaseEntity {
 	@JoinColumn(name = "LOGO")
 	@OneToOne(fetch = FetchType.LAZY)
 	private GeneralFiles logo;
+
+	private String categoryUrl;
+
 }

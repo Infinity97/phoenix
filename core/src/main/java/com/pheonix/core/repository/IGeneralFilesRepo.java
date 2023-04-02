@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface IGeneralFilesRepo extends JpaRepository<GeneralFiles,String> {
 
-	List<GeneralFiles> findByContextId(String contextId);
+	List<GeneralFiles> findByContextIdAndDeletedIsFalse(String contextId);
 	List<GeneralFiles> findByType(FileType fileType);
 
 }

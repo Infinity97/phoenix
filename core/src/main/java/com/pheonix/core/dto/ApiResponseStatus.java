@@ -2,6 +2,7 @@ package com.pheonix.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 @Getter
@@ -31,34 +32,29 @@ public enum ApiResponseStatus {
     COUNTRY_NOT_PRESENT(1002,"Country Not found"),
     CONTEXT_TYPE_NOT_PRESENT(1002,"Incorrect User Type"),
 
-	//Seller Related Errors
-    SELLER_NOT_AVAILABLE(1002,"Seller is not available"),
-
     //Product Detail Related Errors
     PRODUCT_NAME_NOT_ENTERED(1003, "Product name is not entered"),
     PRODUCT_DOES_NOT_EXIST(1003, "Product does not exist"),
     PRODUCT_ALREADY_EXIST(1003, "Product already exist"),
-    COMPANY_NOT_ENTERED(1003, "Company name is not entered"),
-    COMPANY_DOEST_NOT_EXIST(1003, "Company does not exist"),
-    COMPANY_ALREADY_EXIST(1003,"Company already exist"),
-    CATEGORY_DOES_NOT_EXIST(1003, "Category Does Not Exist"),
-    PARENT_CATEGORY_DOES_NOT_EXIST(1003, "Parent Category Does Not Exist"),
-    CATEGORY_NOT_ENTERED(1003, "Category is not entered"),
-    CATEGORY_ALREADY_EXIST(1003, "Category Already exists"),
-    BRAND_ALREADY_EXIST(1003, "Brand Already exists"),
-    BRAND_DOES_NOT_EXIST(1003, "Brand Does not exist"),
 
-    //Review Related Errors
-    REVIEW_DOES_NOT_EXIST(1004,"Review Does Not Exist"),
-    NOT_VALID_RATING(1004, " Not a Valid Rating"),
+    COMPANY_NOT_ENTERED(1004, "Company name is not entered"),
+    COMPANY_DOEST_NOT_EXIST(1004, "Company does not exist"),
+    COMPANY_ALREADY_EXIST(1004,"Company already exist"),
 
+    CATEGORY_DOES_NOT_EXIST(1005, "Category Does Not Exist"),
+    PARENT_CATEGORY_DOES_NOT_EXIST(1005, "Parent Category Does Not Exist"),
+    CATEGORY_NOT_ENTERED(1005, "Category is not entered"),
+    CATEGORY_ALREADY_EXIST(1005, "Category Already exists"),
 
-    //Cart related Errors
-    CART_DOES_NOT_EXIST(1005,"Cart does not exist"),
-    CART_DETAIL_NOT_PRESENT_IN_CART(1005,"Cart detail is not associated to the same cart"),
-    CART_DETAIL_DOES_NOT_EXIST(1005,"Cart detail does not exist"),
-    CART_IS_EMPTY(1005,"Cart is empty"),
-    NOT_A_VALID_QUANTITY(1005,"Please enter a valid quantity");
+    BRAND_ALREADY_EXIST(1006, "Brand Already exists"),
+    BRAND_DOES_NOT_EXIST(1006, "Brand Does not exist"),
+
+    SUBSCRIPTION_DOES_NOT_EXIST(1007, "Subscription does not exist"),
+    DEVICE_DOES_NOT_EXIST(1007, "Device does not exist"),
+
+    FILE_DOES_NOT_EXIST(1008, "File does not exist"),
+
+    ;
 
 	private int code;
   private String message;

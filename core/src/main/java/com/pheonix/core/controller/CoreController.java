@@ -25,4 +25,10 @@ public class CoreController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@PostMapping(value = "test2")
+	public ResponseEntity<ApiResponse<Void>> test2() {
+		coreService.test();
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 }

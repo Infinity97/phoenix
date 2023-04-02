@@ -26,7 +26,8 @@ public class GlobalExceptionHandler {
 		log.error("MACException occurred : {}", loe.getMessage());
 		response.setStatus(loe.getHttpStatus().value());
 		response.setHeader("Status", loe.getHttpStatus().value() + " " + loe.getHttpStatus().getReasonPhrase());
-		return new ApiResponse<>(HttpStatus.BAD_REQUEST,loe);
+		return new ApiResponse<>(loe);
+//		return new ApiResponse<>(HttpStatus.BAD_REQUEST,loe);
 	}
 
 //	@ExceptionHandler(value = MethodArgumentNotValidException.class)

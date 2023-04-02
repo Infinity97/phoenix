@@ -1,9 +1,11 @@
 package com.pheonix.core.repository.dao;
 
+import com.pheonix.core.dto.ApiResponseStatus;
 import com.pheonix.core.dto.response.PagingResponse;
 import com.pheonix.core.dto.vo.DeviceVo;
 import com.pheonix.core.model.Devices;
 import com.pheonix.core.repository.DeviceRepo;
+import com.pheonix.core.utils.exception.PheonixException;
 import com.pheonix.core.utils.mapper.MapperUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,10 @@ public class DeviceDao {
 		deviceVoPagingResponse.setNoOfPages(devicesPage.getTotalPages());
 
 		return deviceVoPagingResponse;
+	}
+
+	public Devices findById(String deviceId)throws PheonixException {
+		return deviceRepo.findById(deviceId).orElseThrow(()-> new PheonixException(ApiResponseStatus.DEVICE_DOES_NOT_EXIST));
 	}
 
 

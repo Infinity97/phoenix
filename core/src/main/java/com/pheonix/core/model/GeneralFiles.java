@@ -17,8 +17,6 @@ import javax.persistence.*;
 public class GeneralFiles extends BaseEntity implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(name = "ID", columnDefinition = "VARCHAR(255)", unique = true, nullable = false)
     private String id;
 

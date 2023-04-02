@@ -7,10 +7,9 @@ public interface RestContants {
     String SESSION_ID ="sessionId";
     String AUTH_USERNAME = "authUsername";
     String AUTH_PASSWORD = "authPassword";
+    String PAGE_NO = "pageNo";
+    String PAGE_SIZE = "pageSize";
 
-    interface SESSION{
-        String SESSION = "/session";
-    }
 
     interface LOGIN {
         String LOGIN = "/login";
@@ -25,9 +24,18 @@ public interface RestContants {
     interface USER {
         String USER = "/user";
         String ADD_ADDRESS_DETAILS = "/addAddressDetails";
+        String UPDATE_ADDRESS_DETAILS = "/updateAddressDetails";
+        String GET_ADDRESS_DETAILS = "/getAddressDetails";
+        String DELETE_ADDRESS = "/deleteAddress";
+        String ADDRESS_ID = "addressId";
         String UPDATE = "/update";
         String GET = "/get";
 
+    }
+
+    interface FRIENDS{
+        String FRIENDS = "/friends";
+        String LIVE = "/live";
     }
 
     interface PRODUCT {

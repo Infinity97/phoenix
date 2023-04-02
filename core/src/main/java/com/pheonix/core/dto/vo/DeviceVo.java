@@ -7,9 +7,7 @@ import com.pheonix.core.dto.response.FileTypeResponse;
 import com.pheonix.core.utils.enums.DeviceStatus;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -21,11 +19,14 @@ public class DeviceVo extends BasePojo {
 	private String name;
 	private CategoryVo category;
 	private BrandVo brand;
-	private LocalDateTime dateOfPurchase;
-	private Double warrantyYears;
-	private LocalDateTime dateOfExpiry;
+	private String dateOfPurchase;
+	private Integer warrantyDays;
+	private String dateOfExpiry;
 	private String additionalDetails;
 	private Long price;
 	private DeviceStatus status;
+	private Boolean isPublic;
 	private List<FileTypeResponse> fileUrls;
+	private String productId;
+	private SellerDetails sellerDetails;
 }

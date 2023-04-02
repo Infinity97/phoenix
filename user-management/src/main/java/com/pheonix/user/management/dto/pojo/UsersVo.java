@@ -1,5 +1,6 @@
 package com.pheonix.user.management.dto.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,7 +26,10 @@ public class UsersVo extends BasePojo {
     private String emailId;
     private Integer countryId;
     private String mobileNumber;
+
+    @JsonIgnore
     private String password;
+
     private UserStatus status;
     private LoginType loginType;
     private String education;

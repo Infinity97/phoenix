@@ -35,6 +35,8 @@ public class AddressVo {
 
 	private String nickname;
 
+	private String landmark;
+
 	private String userId;
 
 }

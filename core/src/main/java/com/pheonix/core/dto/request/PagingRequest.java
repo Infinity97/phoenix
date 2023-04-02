@@ -9,7 +9,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PagingRequest {
+public class PagingRequest<T> {
 	private Integer pageNumber;
 	private Integer pageSize;
+	private T request;
 }

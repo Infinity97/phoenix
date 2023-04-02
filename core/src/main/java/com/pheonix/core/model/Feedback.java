@@ -15,8 +15,8 @@ import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(name = "COMPANY")
-@Table(name = "COMPANY")
+@Entity(name = "FEEDBACK")
+@Table(name = "FEEDBACK")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,6 +28,15 @@ public class Feedback extends BaseEntity{
 	@Column(name = "ID", columnDefinition = "VARCHAR(255)", unique = true, nullable = false)
 	private String id;
 
+	@Column(name = "FEEDBACK_TYPE")
 	private String feedbackType;
+
+	@Column(name = "CONTENT")
+	private String content;
+
+	@Column(name = "FILE_URL")
+	private String fileUploadUrl;
+
+
 
 }

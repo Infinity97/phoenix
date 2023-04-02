@@ -36,7 +36,7 @@ public class Products extends BaseEntity {
     @Column(name = "SINGLE_LINE_DESCRIPTION", columnDefinition = "VARCHAR(60)")
     private String singleLineDescription;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "FILE_ID")
     private List<GeneralFiles> generalFiles;
 

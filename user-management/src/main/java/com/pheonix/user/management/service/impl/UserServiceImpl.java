@@ -4,27 +4,36 @@ import com.pheonix.user.management.dao.*;
 import com.pheonix.user.management.dao.repository.ContextTypeRepository;
 import com.pheonix.user.management.dto.ApiResponseStatus;
 import com.pheonix.user.management.dto.pojo.AddressVo;
+import com.pheonix.user.management.dto.pojo.FriendVo;
 import com.pheonix.user.management.dto.pojo.UserSessionVO;
+import com.pheonix.user.management.dto.request.PagingRequest;
 import com.pheonix.user.management.dto.request.UserRequest;
+import com.pheonix.user.management.dto.response.PagingResponse;
 import com.pheonix.user.management.dto.response.UserResponse;
 import com.pheonix.user.management.model.*;
 import com.pheonix.user.management.service.IUserService;
 import com.pheonix.user.management.utils.exception.PheonixException;
 import com.pheonix.user.management.utils.helper.MapperUtil;
 import com.pheonix.user.management.utils.helper.VarUtils;
-import io.swagger.annotations.Api;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.springframework.util.CollectionUtils;
 
 import javax.inject.Provider;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -40,6 +49,7 @@ public class UserServiceImpl implements IUserService {
 	private final AddressDao addressDao;
 	private final MapperUtil mapperUtil;
 	private final Provider<UserSessionVO> userSessionVOProvider;
+	private final FriendsDao friendsDao;
 
 	@Override
 	public UserAuthSession getValidSession(UserRequest userRequest) throws PheonixException {
@@ -75,14 +85,13 @@ public class UserServiceImpl implements IUserService {
 	public Users createUser(UserRequest userRequest) throws PheonixException {
 		if (!VarUtils.isValid(userRequest.getMobileNumber()) && !(StringUtils.isNotBlank(userRequest.getEmailId()) && StringUtils.isNotBlank(userRequest.getPassword())))
 			throw new PheonixException(ApiResponseStatus.INCOMPLETE_OR_INCORRECT_REQUEST);
-		return usersDao.save(convertUserRequestToUserEntity(userRequest,null));
+		Users users = usersDao.save(convertUserRequestToUserEntity(userRequest,null));
+		replaceIfUserAlreadyAFriend(users);
+		return users;
 	}
 
 	@Override
 	public UserResponse updateUser(UserRequest userRequest) throws PheonixException {
-
-
-
 		if(StringUtils.isBlank(userRequest.getId()))
 			throw new PheonixException(ApiResponseStatus.INCOMPLETE_OR_INCORRECT_REQUEST);
 
@@ -98,10 +107,12 @@ public class UserServiceImpl implements IUserService {
 
 		if (VarUtils.isValid(userRequest.getMobileNumber()))
 			users.setMobileNumber(userRequest.getMobileNumber());
-		else if(StringUtils.isNotBlank(userRequest.getEmailId()) && StringUtils.isNotBlank(userRequest.getPassword())){
+
+		if(StringUtils.isNotBlank(userRequest.getEmailId()))
 			users.setEmailId(userRequest.getEmailId());
+
+		if(StringUtils.isNotBlank(userRequest.getPassword()))
 			users.setPassword(userRequest.getPassword());
-		}
 
 		if (VarUtils.isValid(userRequest.getCountryId())) {
 			Country country = countryDao.findById(userRequest.getCountryId());
@@ -118,7 +129,7 @@ public class UserServiceImpl implements IUserService {
 			users.setLastName(userRequest.getLastName());
 
 		if(VarUtils.isValid(userRequest.getProfession()))
-			users.setPassword(userRequest.getProfession());
+			users.setProfession(userRequest.getProfession());
 
 		if(VarUtils.isValid(userRequest.getGender()))
 			users.setGender(userRequest.getGender());
@@ -152,8 +163,12 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<AddressVo> getAddressOfUser() throws PheonixException {
-		return null;
+	public List<AddressVo> getAddressOfUser(Integer id) throws PheonixException {
+
+		if(VarUtils.isValid(id))
+			return Arrays.asList(mapperUtil.map(addressDao.findByIdThrowsException(id)));
+
+		return mapperUtil.map(addressDao.findByUserId(userSessionVOProvider.get().getUserId()));
 	}
 
 	@Override
@@ -167,10 +182,53 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public AddressVo addAddressOfUser(AddressVo addressVo) {
-		Address address = addressDao.save(convertAddressVoToEntity(addressVo));
+	public AddressVo addAddressOfUser(AddressVo addressVo)throws PheonixException {
+		String userId = addressVo.getUserId();
+
+		Users users = usersDao.findById(userId);
+		Address address = mapperUtil.map(addressVo);
+		address.setUsers(users);
+		address = addressDao.save(address);
+
 		addressVo.setId(address.getId());
 		return addressVo;
+	}
+
+	@Override
+	public AddressVo updateAddressOfUser(AddressVo addressVo) throws PheonixException {
+		Address address = addressDao.findByIdThrowsException(addressVo.getId());
+
+		if(VarUtils.isValid(addressVo.getAddressOne()))
+			address.setAddressOne(addressVo.getAddressOne());
+
+		if(VarUtils.isValid(addressVo.getAddressTwo()))
+			address.setAddressTwo(addressVo.getAddressTwo());
+
+		if(VarUtils.isValid(addressVo.getCity()))
+			address.setCity(addressVo.getCity());
+
+		if(VarUtils.isValid(addressVo.getCountry()))
+			address.setCountry(addressVo.getCountry());
+
+		if(VarUtils.isValid(addressVo.getLandmark()))
+			address.setLandmark(addressVo.getLandmark());
+
+		if(VarUtils.isValid(addressVo.getNickname()))
+			address.setNickname(addressVo.getNickname());
+
+		if(VarUtils.isValid(addressVo.getPinCode()))
+			address.setPinCode(addressVo.getPinCode());
+
+		if(VarUtils.isValid(addressVo.getState()))
+			address.setState(addressVo.getState());
+
+		if(VarUtils.isValid(addressVo.getLatitude()))
+			address.setLatitude(addressVo.getLatitude());
+
+		if(VarUtils.isValid(addressVo.getLongitude()))
+			address.setLongitude(addressVo.getLongitude());
+
+		return mapperUtil.map(addressDao.save(address));
 	}
 
 	@Override
@@ -184,13 +242,6 @@ public class UserServiceImpl implements IUserService {
 		return users;
 	}
 
-	private Address convertAddressVoToEntity(AddressVo addressVo){
-
-		return Address.builder().addressOne(addressVo.getAddressOne()).addressTwo(addressVo.getAddressTwo())
-			.country(addressVo.getCountry()).city(addressVo.getCity()).latitude(addressVo.getLatitude()).longitude(addressVo.getLongitude()).pinCode(addressVo.getPinCode())
-			.nickname(addressVo.getNickname()).build();
-	}
-
 	@Override
 	public UserAuthSession getSessionData(String sessionId) throws PheonixException {
 		 return userAuthSessionDao.findBySessionId(sessionId).orElseThrow(()-> new PheonixException(ApiResponseStatus.UNAUTHORIZED));
@@ -200,5 +251,60 @@ public class UserServiceImpl implements IUserService {
 	public UserResponse getUserInfo() throws PheonixException {
 		String userId = userSessionVOProvider.get().getUserId();
 		return mapperUtil.map(usersDao.findById(userId));
+	}
+
+	@Override
+	public void deleteAddress(Integer addressId) throws PheonixException {
+		String userId = userSessionVOProvider.get().getUserId();
+		List<Address> addresses = addressDao.findByUserId(userId);
+		if(CollectionUtils.isEmpty(addresses) || addresses.size()<2){
+			throw new PheonixException(ApiResponseStatus.MINIMUM_ONE_ADDRESS_MANDATORY);
+		}
+		addressDao.softDelete(addressId);
+	}
+
+	@Override
+	public void addFriends(List<FriendVo> friendVoList) throws PheonixException {
+		String userId = userSessionVOProvider.get().getUserId();
+		Users users = usersDao.findById(userId);
+
+		if(CollectionUtils.isEmpty(friendVoList))
+			throw new PheonixException(ApiResponseStatus.INCOMPLETE_OR_INCORRECT_REQUEST);
+
+		friendVoList.forEach(friendVo -> {
+			try{
+				usersDao.findOptionalByMobileNumber(friendVo.getMobileNumber()).ifPresentOrElse(user -> {
+						Friends friend = Friends.builder().user(users).friend(user).build();
+						friendsDao.save(friend);
+						},()->{
+						Friends nonUserFriend = mapperUtil.map(friendVo);
+						nonUserFriend.setUser(users);
+						friendsDao.save(nonUserFriend);
+				});
+			}catch (PheonixException e){log.error(e.getMessage());}
+		});
+
+	}
+
+	@Async
+	@Override
+	public void replaceIfUserAlreadyAFriend(Users users) throws PheonixException {
+
+		List<Friends> friendsList = friendsDao.findByMobileNumber(users.getMobileNumber());
+		List<Friends> updatedFriends = friendsList.stream().peek(friends -> friends.setUser(users)).collect(Collectors.toList());
+
+		friendsDao.saveAll(updatedFriends);
+	}
+
+	@Override
+	public PagingResponse<FriendVo> getLiveFriendsOfUser(PagingRequest pagingRequest) throws PheonixException {
+		String userId = userSessionVOProvider.get().getUserId();
+		Users users = usersDao.findById(userId);
+
+		Pageable pageable = PageRequest.of(pagingRequest.getPageNumber(),pagingRequest.getPageSize());
+
+		Page<Friends> friendsPage = friendsDao.findLiveFriendsByUser(users,pageable);
+
+		return mapperUtil.convertFriendsToPage(friendsPage);
 	}
 }

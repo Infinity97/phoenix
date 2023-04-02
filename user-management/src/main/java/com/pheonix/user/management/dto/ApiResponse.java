@@ -75,7 +75,7 @@ public class ApiResponse<T> {
     public ApiResponse(PheonixException pheonixException){
         this();
         this.message = pheonixException.getMessage();
-        this.status = pheonixException.getHttpStatus();
+        this.status = pheonixException.getHttpStatus() !=null ? pheonixException.getHttpStatus() : HttpStatus.BAD_REQUEST;
         this.apiResponseStatus = pheonixException.getStatus();
     }
 }

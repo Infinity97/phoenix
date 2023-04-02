@@ -19,8 +19,6 @@ public class ApiResponse<T> {
     private HttpStatus status;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private String timeStamp;
-    private String message;
-    private String debugMessage;
     private T responseObject;
     private ApiResponseStatus apiResponseStatus;
 
@@ -33,20 +31,6 @@ public class ApiResponse<T> {
         this.status = status;
     }
 
-    public ApiResponse(HttpStatus status, Throwable exception) {
-        this();
-        this.status = status;
-        this.message = "UnExpected Error";
-        this.debugMessage = exception.getLocalizedMessage();
-    }
-
-    public ApiResponse(HttpStatus status, String message, Throwable exception) {
-        this();
-        this.status = status;
-        this.message = message;
-        this.debugMessage = exception.getLocalizedMessage();
-    }
-
     public ApiResponse(ApiResponseStatus apiResponseStatus, T responseObject) {
         this();
         this.apiResponseStatus = apiResponseStatus;
@@ -57,13 +41,6 @@ public class ApiResponse<T> {
         this();
         this.responseObject = responseObject;
         this.apiResponseStatus = ApiResponseStatus.SUCCESS;
-    }
-
-    public ApiResponse(ApiResponseStatus apiResponseStatus, Throwable exception){
-        this();
-        this.apiResponseStatus = apiResponseStatus;
-        this.debugMessage = exception.getLocalizedMessage();
-        log.error("Error occured:- ", exception);
     }
 
     public ApiResponse(ApiResponseStatus apiResponseStatus) {

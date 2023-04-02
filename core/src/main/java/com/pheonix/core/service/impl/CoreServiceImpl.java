@@ -2,8 +2,9 @@ package com.pheonix.core.service.impl;
 
 import com.pheonix.core.dto.vo.CategoryVo;
 import com.pheonix.core.model.Brand;
+import com.pheonix.core.model.SubscriptionMstr;
 import com.pheonix.core.repository.dao.BrandDao;
-import com.pheonix.core.service.DeviceService;
+import com.pheonix.core.service.PurchaseService;
 import com.pheonix.core.service.ICoreService;
 import com.pheonix.core.utils.helper.CommonUtil;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.Scanner;
 @Slf4j
 public class CoreServiceImpl implements ICoreService {
 
-	private final DeviceService categoryService;
+	private final PurchaseService purchaseService;
 	private final BrandDao brandDao;
 
 	@Override
@@ -28,7 +29,7 @@ public class CoreServiceImpl implements ICoreService {
 			scanner.useDelimiter(",");
 			while (scanner.hasNext()){
 				try {
-					categoryService.addCategory(CategoryVo.builder().name(CommonUtil.capitalizeEachWord(scanner.next().trim())).build());
+					purchaseService.addCategory(CategoryVo.builder().name(CommonUtil.capitalizeEachWord(scanner.next().trim())).build());
 				}catch (Exception e){
 					log.error(e.getMessage());
 				}
@@ -54,4 +55,21 @@ public class CoreServiceImpl implements ICoreService {
 			log.error(e.getMessage());
 		}
 	}
+
+	@Override
+	public void test() {
+
+		try {
+			Scanner scanner = new Scanner(new File("D:\\Pheonix\\core\\src\\main\\resources\\data\\Subscriptions.csv"));
+			scanner.useDelimiter("\n");
+			while (scanner.hasNext()) {
+				try {
+					purchaseService.addSubscriptionMstr(SubscriptionMstr.builder().name(scanner.next()).build());
+				} catch (Exception e) {
+					log.error(e.getMessage());
+				}
+			}
+		}catch (Exception e){}
+	}
+
 }
