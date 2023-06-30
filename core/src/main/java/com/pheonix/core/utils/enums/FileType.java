@@ -16,12 +16,15 @@ public enum FileType {
     LOGO_CATEGORY(AppConstants.CATEGORY),
     LOGO_BRAND(AppConstants.BRAND),
     LOGO_SUBSCRIPTIONS(AppConstants.SUBSCRIPTION),
+    LOGO_COMPANY(AppConstants.COMPANY),
     PRODUCT(AppConstants.PRODUCT),
     BILL(AppConstants.DEVICE),
     WARRANTY(AppConstants.DEVICE),
     DEVICE(AppConstants.DEVICE),
     HOME(AppConstants.GENERIC),
-    SUBSCRIPTION_BILL(AppConstants.SUBSCRIPTION)
+    SUBSCRIPTION_BILL(AppConstants.SUBSCRIPTION),
+    REVIEW(AppConstants.REVIEW),
+    COMPANY(AppConstants.COMPANY)
     ;
 
     private String tableMappedTo;

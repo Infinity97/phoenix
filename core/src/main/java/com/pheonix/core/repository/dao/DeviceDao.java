@@ -33,13 +33,15 @@ public class DeviceDao {
 		deviceVoPagingResponse.setValues(mapperUtil.map(devicesPage.getContent()));
 		deviceVoPagingResponse.setPageNumber(devicesPage.getNumber());
 		deviceVoPagingResponse.setNoOfPages(devicesPage.getTotalPages());
-
+		deviceVoPagingResponse.setTotalNumberOfElements(devicesPage.getTotalElements());
 		return deviceVoPagingResponse;
 	}
 
 	public Devices findById(String deviceId)throws PheonixException {
 		return deviceRepo.findById(deviceId).orElseThrow(()-> new PheonixException(ApiResponseStatus.DEVICE_DOES_NOT_EXIST));
 	}
+
+
 
 
 }

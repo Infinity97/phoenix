@@ -3,13 +3,16 @@ package com.pheonix.core.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+
+@Getter
+@Setter
 @Entity(name = "BRAND")
 @Table(name = "BRAND")
 @SuperBuilder
@@ -32,6 +35,6 @@ public class Brand extends BaseEntity{
 	//This field will be populated if a brand is associated with us and is mapped to a company that is onboarded with us.
 	@JoinColumn(name = "COMPANY_ID")
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Company companyId;
+	private Company company;
 
 }

@@ -5,7 +5,10 @@ import org.springframework.util.StringUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
@@ -38,4 +41,14 @@ public class FileUtils {
 				return "";
 		}
 	}
+
+	public static File convertByteArrayToFile(byte[] fileInBytes)throws IOException {
+		File file = new File("D:\\Pheonix\\core\\src\\main\\resources\\something.png");
+		OutputStream outputStream = new FileOutputStream(file);
+		outputStream.write(fileInBytes);
+
+		outputStream.close();
+		return file;
+	}
+
 }

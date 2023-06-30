@@ -1,8 +1,10 @@
 package com.pheonix.user.management.model;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -17,7 +19,9 @@ import javax.persistence.Table;
 @Table(name = "FRIENDS")
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Friends extends BaseEntity implements java.io.Serializable{
 
 	@Id

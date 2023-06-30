@@ -33,6 +33,8 @@ public enum ApiResponseStatus {
     ADDRESS_DOES_NOT_EXIST(1005,"Address Entered is incorrect"),
     MINIMUM_ONE_ADDRESS_MANDATORY(1006,"Sorry! Cannot Delete as at least one address is mandatory"),
 
+    NO_FRIENDS_ADDED(1007, "No friends are added so far"),
+
     ;
 
 

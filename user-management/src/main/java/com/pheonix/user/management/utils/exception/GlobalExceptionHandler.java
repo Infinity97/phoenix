@@ -22,11 +22,11 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value = PheonixException.class)
 	@ResponseBody
-	public <T> ApiResponse<T> handleLavaOssException(PheonixException loe, HttpServletResponse response) {
-		log.error("MACException occurred : {}", loe.getMessage());
+	public ApiResponseStatus handleLavaOssException(PheonixException loe, HttpServletResponse response) {
+		log.error("Pheonix Exception occurred : {}", loe.getMessage());
 		response.setStatus(loe.getHttpStatus().value());
 		response.setHeader("Status", loe.getHttpStatus().value() + " " + loe.getHttpStatus().getReasonPhrase());
-		return new ApiResponse<>(loe);
+		return loe.getStatus();
 //		return new ApiResponse<>(HttpStatus.BAD_REQUEST,loe);
 	}
 

@@ -24,13 +24,11 @@ public class ContextType extends BaseEntity implements java.io.Serializable{
      * Different type of users in our systems.
      *
      * USER
+     * SYSTEM
      * COMPANY_USER
      * COMPANY_ADMIN
-     * SERVICE_ADMIN
-     * SERVICE_USER
-     * ENTERPRISE_USER
-     * ENTERPRISE_ADMIN
-     *
+     * REPAIRER_ADMIN
+     * REPAIRER_USER
      */
     @Column(name = "TYPE", columnDefinition = "VARCHAR(255)", unique = true, nullable = false)
     private String type;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ICategoryRepo extends PagingAndSortingRepository<Category,Long> {
+public interface CategoryRepo extends PagingAndSortingRepository<Category,Long> {
 
 	Optional<Category> findByName(String name);
 

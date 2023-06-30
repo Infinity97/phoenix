@@ -71,8 +71,6 @@ public class AuthEnforcerInterceptor implements HandlerInterceptor {
                 Users user = usersRepository.findByUsernameAndStatus(username, UserStatus.ACTIVE)
                   .orElse(usersRepository.findByEmailId(username).orElseThrow(() -> new PheonixException(ApiResponseStatus.INVALID_SESSION_ID, HttpStatus.UNAUTHORIZED)));
 
-
-
                 if (password.equalsIgnoreCase(user.getPassword())) {
                     final UserSessionVO userSessionVO = userSessionVOProvider.get();
                     userSessionVO.setMobileNumber(user.getMobileNumber());

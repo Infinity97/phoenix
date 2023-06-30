@@ -2,7 +2,7 @@ package com.pheonix.core.repository.dao;
 
 import com.pheonix.core.dto.request.PagingRequest;
 import com.pheonix.core.model.Category;
-import com.pheonix.core.repository.ICategoryRepo;
+import com.pheonix.core.repository.CategoryRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @Slf4j
 public class CategoryDao{
 
-	private final ICategoryRepo categoryRepo;
+	private final CategoryRepo categoryRepo;
 
 	public Category save(Category category){
 		return categoryRepo.save(category);

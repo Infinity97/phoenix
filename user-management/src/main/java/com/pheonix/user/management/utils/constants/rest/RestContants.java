@@ -30,6 +30,7 @@ public interface RestContants {
         String ADDRESS_ID = "addressId";
         String UPDATE = "/update";
         String GET = "/get";
+        String USER_ID = "user_id";
 
     }
 

@@ -1,39 +1,27 @@
 package com.pheonix.core.utils.mapper;
 
 import com.pheonix.core.dto.response.PagingResponse;
-import com.pheonix.core.dto.vo.BrandVo;
-import com.pheonix.core.dto.vo.CategoryVo;
-import com.pheonix.core.dto.vo.DeviceVo;
-import com.pheonix.core.dto.vo.GeneralFileVo;
-import com.pheonix.core.dto.vo.SubscriptionMstrVo;
-import com.pheonix.core.dto.vo.SubscriptionVo;
-import com.pheonix.core.model.Brand;
-import com.pheonix.core.model.Category;
-import com.pheonix.core.model.Devices;
-import com.pheonix.core.model.GeneralFiles;
-import com.pheonix.core.model.SubscriptionMstr;
-import com.pheonix.core.model.Subscriptions;
-import com.pheonix.core.repository.dao.SubscriptionsDao;
+import com.pheonix.core.dto.vo.*;
+import com.pheonix.core.model.*;
 import com.pheonix.core.service.IFileService;
+import com.pheonix.core.utils.enums.FileType;
+import com.pheonix.core.utils.enums.ReferralTransactionStatus;
 import com.pheonix.core.utils.helper.CommonUtil;
 import com.pheonix.core.utils.helper.VarUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.time.DateUtils;
-import org.aspectj.weaver.ast.Var;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.temporal.TemporalAmount;
-import java.util.Calendar;
+import javax.inject.Provider;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
@@ -41,6 +29,7 @@ import java.util.List;
 public class MapperUtil{
 
 	private final Environment environment;
+	private final Provider<IFileService> fileService;
 
 	public CategoryVo map(Category category){
 		ModelMapper modelMapper = new ModelMapper();
@@ -165,6 +154,130 @@ public class MapperUtil{
 		pagingResponse.setValues(convertListOfSubscriptionsMstrToVo(page.getContent()));
 		pagingResponse.setTotalNumberOfElements(page.getTotalElements());
 		return pagingResponse;
+	}
+
+	public ReviewVo map(Reviews reviews){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<Reviews, ReviewVo> mapper = modelMapper.createTypeMap(Reviews.class,ReviewVo.class);
+		return mapper.map(reviews);
+	}
+
+	public Reviews map(ReviewVo reviewVo){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<ReviewVo, Reviews> mapper = modelMapper.createTypeMap(ReviewVo.class,Reviews.class);
+		return mapper.map(reviewVo);
+	}
+
+	public List<ReviewVo> convertReviewsToList(List<Reviews> reviewsList){
+		if(CollectionUtils.isEmpty(reviewsList))
+			return Collections.emptyList();
+		return reviewsList.stream().map(this::map).toList();
+	}
+
+	public PagingResponse<ReviewVo> map(Page<Reviews> reviewsPage){
+		PagingResponse<ReviewVo> pagingResponse = new PagingResponse<>();
+		pagingResponse.setPageNumber(reviewsPage.getNumber());
+		pagingResponse.setNoOfPages(reviewsPage.getTotalPages());
+		pagingResponse.setValues(convertReviewsToList(reviewsPage.getContent()));
+		pagingResponse.setTotalNumberOfElements(reviewsPage.getTotalElements());
+		return pagingResponse;
+	}
+
+	public CompanyVo map(Company company){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<Company, CompanyVo> mapper = modelMapper.createTypeMap(Company.class,CompanyVo.class);
+		CompanyVo companyVo = mapper.map(company);
+		companyVo.setLogoUrl(CommonUtil.mapUrlFromEntity(company.getLogo()));
+		return companyVo;
+	}
+
+	public Company map(CompanyVo companyVo){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<CompanyVo, Company> mapper = modelMapper.createTypeMap(CompanyVo.class,Company.class);
+		return mapper.map(companyVo);
+	}
+
+	public Products map(ProductVo productVo){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<ProductVo, Products> mapper = modelMapper.createTypeMap(ProductVo.class,Products.class);
+		return mapper.map(productVo);
+	}
+
+	public ProductVo map(Products product){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<Products, ProductVo> mapper = modelMapper.createTypeMap(Products.class,ProductVo.class);
+		ProductVo productVo = mapper.map(product);
+
+		Optional.ofNullable(fileService.get().getFilesByFileType(productVo.getProductId(), FileType.PRODUCT.getTableMappedTo())).ifPresent(
+			generalFileMap -> {
+				if (generalFileMap.containsKey(FileType.PRODUCT)){
+					List<String> urls = CommonUtil.mapUrlListFromEntities(generalFileMap.get(FileType.PRODUCT));
+					productVo.setFileUrls(urls);
+				}
+			});
+		return productVo;
+	}
+
+	public List<ProductVo> convertListOfProductsToVo(List<Products> productsList){
+
+		if(CollectionUtils.isEmpty(productsList))
+			return Collections.emptyList();
+
+		return productsList.stream().map(this::map).toList();
+	}
+
+	public RepairerVo map(Repairers repairers){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<Repairers, RepairerVo> mapper = modelMapper.createTypeMap(Repairers.class,RepairerVo.class);
+		return mapper.map(repairers);
+	}
+
+	public Repairers map(RepairerVo repairerVo){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<RepairerVo, Repairers> mapper = modelMapper.createTypeMap(RepairerVo.class,Repairers.class);
+		return mapper.map(repairerVo);
+	}
+
+	public List<RepairerVo> convertListOfRepairersToVo(List<Repairers> repairers){
+		if(!VarUtils.isValid(repairers))
+			return Collections.emptyList();
+
+		return repairers.stream().map(this::map).toList();
+	}
+
+	public PagingResponse<RepairerVo> mapCompanyRepairersPageToRepairersResponse(Page<CompanyRepairers> companyRepairers){
+		if(companyRepairers == null)
+			return new PagingResponse<>();
+
+		PagingResponse<RepairerVo> pagingResponse = new PagingResponse<>();
+		pagingResponse.setPageNumber(companyRepairers.getNumber());
+		pagingResponse.setNoOfPages(companyRepairers.getTotalPages());
+		pagingResponse.setTotalNumberOfElements(companyRepairers.getTotalElements());
+		pagingResponse.setValues(convertListOfRepairersToVo(companyRepairers.getContent().stream().map(CompanyRepairers::getRepairers).toList()));
+
+		return pagingResponse;
+	}
+
+	public ProductReferralVo map(ProductReferral productReferral){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<ProductReferral, ProductReferralVo> mapper = modelMapper.createTypeMap(ProductReferral.class,ProductReferralVo.class);
+		return mapper.map(productReferral);
+	}
+
+	public ProductReferral map(ProductReferralVo productReferralVo){
+		ModelMapper modelMapper = new ModelMapper();
+		TypeMap<ProductReferralVo, ProductReferral> mapper = modelMapper.createTypeMap(ProductReferralVo.class,ProductReferral.class);
+		return mapper.map(productReferralVo);
+	}
+
+	public ReferralTransaction map(ReferralTransactionVo referralTransactionVo){
+
+		return ReferralTransaction.builder().
+			referralStatus(referralTransactionVo.getReferralStatus())
+			.referredBy(referralTransactionVo.getReferredBy().getId())
+			.referredTo(referralTransactionVo.getReferredTo().getId())
+			.mobileNumber(referralTransactionVo.getReferredTo().getMobileNumber())
+			.build();
 	}
 
 }

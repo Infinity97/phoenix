@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IGeneralFilesRepo extends JpaRepository<GeneralFiles,String> {
+public interface GeneralFilesRepo extends JpaRepository<GeneralFiles,String> {
 
 	List<GeneralFiles> findByContextIdAndDeletedIsFalse(String contextId);
 	List<GeneralFiles> findByType(FileType fileType);

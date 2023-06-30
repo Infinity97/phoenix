@@ -6,5 +6,6 @@ public enum UnitType {
     LTR,
     CARTOON,
     BOX,
+    KGS,
 
 }

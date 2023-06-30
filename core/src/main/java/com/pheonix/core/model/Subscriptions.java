@@ -5,15 +5,18 @@ import com.pheonix.core.utils.enums.SubscriptionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+
+@Getter
+@Setter
 @Entity(name = "USER_SUBSCRIPTION")
 @Table(name = "USER_SUBSCRIPTION")
 @SuperBuilder

@@ -34,7 +34,7 @@ public class FriendsDaoImpl implements FriendsDao {
 	public List<Friends> findByMobileNumber(String mobileNumber) {
 		if(!VarUtils.isValid(mobileNumber))
 			return Collections.emptyList();
-		return friendsRepository.findByMobileNumber(mobileNumber);
+		return friendsRepository.findByMobileNumberContaining(mobileNumber);
 	}
 
 	@Override
@@ -45,7 +45,6 @@ public class FriendsDaoImpl implements FriendsDao {
 	@Override
 	public Page<Friends> findLiveFriendsByUser(Users users, Pageable pageable) {
 
-		Page<Friends> friendsResponse =  friendsRepository.findByUser(users,pageable);
-		return friendsResponse;
+		return friendsRepository.findByUser_MobileNumberContainingOrFriend_MobileNumberContaining(users.getMobileNumber(),users.getMobileNumber(),pageable);
 	}
 }

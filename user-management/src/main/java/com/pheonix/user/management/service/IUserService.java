@@ -34,8 +34,9 @@ public interface IUserService {
 	Users validateEmailSendUser(String emailAddress, String password)throws PheonixException;
 	UserAuthSession getSessionData(String sessionId)throws PheonixException;
 	UserResponse getUserInfo()throws PheonixException;
+	UserResponse getUserInfo(String userId)throws PheonixException;
 
 	void addFriends(List<FriendVo> friendVoList)throws PheonixException;
 	void replaceIfUserAlreadyAFriend(Users users)throws PheonixException;
-	PagingResponse<FriendVo> getLiveFriendsOfUser(PagingRequest pagingRequest)throws PheonixException;
+	PagingResponse<FriendVo> getLiveFriendsOfUser(PagingRequest<Void> pagingRequest)throws PheonixException;
 }

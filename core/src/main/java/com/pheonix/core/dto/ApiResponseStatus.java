@@ -53,7 +53,14 @@ public enum ApiResponseStatus {
     DEVICE_DOES_NOT_EXIST(1007, "Device does not exist"),
 
     FILE_DOES_NOT_EXIST(1008, "File does not exist"),
+    REVIEW_TYPE_IS_MANDATORY(1009, "Review Type is mandatory"),
+    REVIEW_CONTEXT_ID_IS_MANDATORY(1009, "Review Context is not present"),
 
+    REPAIRER_DOES_NOT_EXIST(1010,"Repairer is not present"),
+
+    PRODUCT_REFERRAL_DOES_NOT_EXIST(1011,"Product Referral does not exist"),
+    USER_REFERRAL_ALREADY_EXIST(1011,"Referral Code already present"),
+    REFERRAL_DOES_NOT_EXIST(1011,"Referral Does Not exist"),
     ;
 
 	private int code;

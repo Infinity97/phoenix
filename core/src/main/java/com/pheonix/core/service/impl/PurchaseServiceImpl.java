@@ -10,18 +10,23 @@ import com.pheonix.core.dto.response.PagingResponse;
 import com.pheonix.core.dto.vo.BrandVo;
 import com.pheonix.core.dto.vo.CategoryVo;
 import com.pheonix.core.dto.vo.DeviceVo;
+import com.pheonix.core.dto.vo.ReviewVo;
 import com.pheonix.core.dto.vo.SubscriptionMstrVo;
 import com.pheonix.core.dto.vo.SubscriptionVo;
 import com.pheonix.core.dto.vo.UserSessionVO;
 import com.pheonix.core.model.Brand;
 import com.pheonix.core.model.Category;
 import com.pheonix.core.model.Devices;
+import com.pheonix.core.model.Reviews;
 import com.pheonix.core.model.SubscriptionMstr;
 import com.pheonix.core.model.Subscriptions;
 import com.pheonix.core.repository.dao.BrandDao;
 import com.pheonix.core.repository.dao.CategoryDao;
 import com.pheonix.core.repository.dao.DeviceDao;
+import com.pheonix.core.repository.dao.ProductDao;
+import com.pheonix.core.repository.dao.ReviewDao;
 import com.pheonix.core.repository.dao.SubscriptionsDao;
+import com.pheonix.core.service.CompanyService;
 import com.pheonix.core.service.PurchaseService;
 import com.pheonix.core.service.IFileService;
 import com.pheonix.core.utils.constants.AppConstants;
@@ -57,6 +62,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 	private final Provider<UserSessionVO> userSessionVO;
 	private final IFileService fileService;
 	private final SubscriptionsDao subscriptionsDao;
+	private final ReviewDao reviewDao;
+	private final ProductDao productDao;
+	private final Provider<CompanyService> companyService;
 
 	@Override
 	public Category addCategory(CategoryVo categoryRequest)throws PheonixException {
@@ -73,6 +81,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 		Brand brand = mapperUtil.map(brandRequest);
 		if(brandDao.findByName(brandRequest.getName()).isPresent())
 			throw new PheonixException(ApiResponseStatus.BRAND_ALREADY_EXIST);
+
+		if(VarUtils.isValid(brandRequest.getCompanyId()))
+			brand.setCompany(companyService.get().findCompanyEntity(brandRequest.getCompanyId()));
 
 		brand.setCreatedBy(userSessionVO.get().getUserId());
 		brand = brandDao.save(brand);
@@ -297,4 +308,5 @@ public class PurchaseServiceImpl implements PurchaseService {
 		subscriptions.setDeleted(true);
 		subscriptionsDao.save(subscriptions);
 	}
+
 }

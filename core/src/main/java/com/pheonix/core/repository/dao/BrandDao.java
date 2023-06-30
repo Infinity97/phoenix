@@ -1,9 +1,11 @@
 package com.pheonix.core.repository.dao;
 
 
+import com.pheonix.core.dto.ApiResponseStatus;
 import com.pheonix.core.dto.request.PagingRequest;
 import com.pheonix.core.model.Brand;
-import com.pheonix.core.repository.IBrandRepo;
+import com.pheonix.core.repository.BrandRepo;
+import com.pheonix.core.utils.exception.PheonixException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -18,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BrandDao {
 
-	private final IBrandRepo brandRepo;
+	private final BrandRepo brandRepo;
 
 	public Brand save(Brand brand){
 		return brandRepo.save(brand);
@@ -32,4 +34,9 @@ public class BrandDao {
 		Pageable pageable = PageRequest.of(pagingRequest.getPageNumber(),pagingRequest.getPageSize());
 		return brandRepo.findAllByDeleted(false, pageable);
 	}
+
+	public Brand getById(Long id)throws PheonixException {
+		return brandRepo.findById(id).orElseThrow(()-> new PheonixException(ApiResponseStatus.BRAND_DOES_NOT_EXIST));
+	}
+
 }

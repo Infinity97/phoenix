@@ -9,14 +9,13 @@ public class RestConstants {
 	public static final String AUTH_PASSWORD = "authPassword";
 	public static final String PAGE_NO = "pageNo";
 	public static final String PAGE_SIZE = "pageSize";
-//	public static final String AUTH_PASSWORD = "authPassword";
+	public static final String ALL = "all";
+// public static final String AUTH_PASSWORD = "authPassword";
 
 	public static final String SLASH = "/";
 	public static final String OPEN_BRACKET = "{";
 	public static final String CLOSE_BRACKET = "}";
 	public static final String DELETE = "/delete";
-
-
 
 	public static final String PURCHASE = "/purchase";
 	public static final String GET_ALL = "/getAll";
@@ -25,7 +24,8 @@ public class RestConstants {
 	public static final String USER_SUBSCRIPTION = "/userSubscription";
 	public static final String DEVICE_ID = "deviceId";
 	public static final String SUBSCRIPTION_ID = "subscriptionId";
-
+	public static final String REVIEW = "/review";
+	public static final String USER = "/user";
 
 	public static final String ID = "id";
 	public static final String CATEGORY = "/category";
@@ -42,6 +42,17 @@ public class RestConstants {
 
 	public static final String SEARCH = "search";
 
+	public static final String REPAIRER = "/repairer";
 
+	public static final String COMPANY = "/company";
+	public static final String COMPANY_ID = "company_id";
+	public static final String OTP = "otp";
+	public static final String BRAND_ID = "brand_id";
 
+	public static final String PRODUCT = "/product";
+	public static final String PRODUCT_ID = "product_id";
+
+	public static final String REFERRAL = "/referral";
+	public static final String REFERRAL_ID = "referral_id";
+	public static final String REDEEM = "/redeem";
 }

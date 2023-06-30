@@ -1,5 +1,11 @@
 package com.pheonix.core.utils.helper;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,17 +30,11 @@ public class WebUtil {
 		return response.body();
 	}
 
-	public static Map<String, String> getRequest(String url, String... headers)
+	public static String getRequest(String url, String... headers)
 		throws IOException, InterruptedException, URISyntaxException {
 		HttpClient httpClient = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).headers(headers).GET().build();
 		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-		return new HashMap<>() {
-			{
-				put("status_code", String.valueOf(response.statusCode()));
-				put("response", response.body());
-			}
-		};
+		return response.body();
 	}
-
 }

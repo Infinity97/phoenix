@@ -254,6 +254,11 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
+	public UserResponse getUserInfo(String userId) throws PheonixException {
+		return mapperUtil.map(usersDao.findById(userId));
+	}
+
+	@Override
 	public void deleteAddress(Integer addressId) throws PheonixException {
 		String userId = userSessionVOProvider.get().getUserId();
 		List<Address> addresses = addressDao.findByUserId(userId);
@@ -297,13 +302,17 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public PagingResponse<FriendVo> getLiveFriendsOfUser(PagingRequest pagingRequest) throws PheonixException {
+	public PagingResponse<FriendVo> getLiveFriendsOfUser(PagingRequest<Void> pagingRequest) throws PheonixException {
 		String userId = userSessionVOProvider.get().getUserId();
 		Users users = usersDao.findById(userId);
 
 		Pageable pageable = PageRequest.of(pagingRequest.getPageNumber(),pagingRequest.getPageSize());
 
 		Page<Friends> friendsPage = friendsDao.findLiveFriendsByUser(users,pageable);
+
+		if(friendsPage.getTotalElements()==0){
+			throw new PheonixException(ApiResponseStatus.NO_FRIENDS_ADDED);
+		}
 
 		return mapperUtil.convertFriendsToPage(friendsPage);
 	}

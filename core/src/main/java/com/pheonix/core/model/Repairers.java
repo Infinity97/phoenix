@@ -3,15 +3,18 @@ package com.pheonix.core.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+
+@Getter
+@Setter
 @Entity(name = "REPAIRERS")
 @Table(name = "REPAIRERS")
 @SuperBuilder
@@ -25,7 +28,7 @@ public class Repairers extends BaseEntity{
 	@Column(name = "ID", columnDefinition = "VARCHAR(255)", unique = true, nullable = false)
 	private String id;
 
-	@Column(name = "NAME")
+	@Column(name = "USER_NAME")
 	private String name;
 
 	@Column(name = "COMPANY_NAME")
@@ -33,20 +36,12 @@ public class Repairers extends BaseEntity{
 
 	@Column(name = "GST_NO")
 	private String gstNo;
-
-	@Column(name = "LATITUDE")
-	private String latitude;
-
-	@Column(name = "LONGITUDE")
-	private String longitude;
-
-	@JoinColumn(name = "DOCUMENTS")
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<GeneralFiles> documents;
 	/**
 	 * A Comma Separated list of email ids to be used to send notifications
 	 */
 	@Column(name = "NOTIFICATION_EMAIL_IDS")
 	private String notificationEmailIds;
 
+	@Column(name = "USER_ID")
+	private String userId;
 }

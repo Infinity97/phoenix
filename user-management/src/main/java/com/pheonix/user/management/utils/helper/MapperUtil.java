@@ -57,7 +57,9 @@ public class MapperUtil {
 	public Friends map(FriendVo friendVo){
 		ModelMapper modelMapper = new ModelMapper();
 		TypeMap<FriendVo, Friends> mapper = modelMapper.createTypeMap(FriendVo.class, Friends.class);
-		return mapper.map(friendVo);
+		Friends friends = mapper.map(friendVo);
+		friends.setMobileNumber(friendVo.getMobileNumber().replaceAll("\\s",""));
+		return friends;
 	}
 
 	public FriendVo map(Friends friends){

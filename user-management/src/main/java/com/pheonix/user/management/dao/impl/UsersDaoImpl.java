@@ -45,6 +45,8 @@ public class UsersDaoImpl implements UsersDao {
         return usersRepository.findByMobileNumber(mobileNumber);
     }
 
+
+
     @Override
     public Optional<Users> findOptionalByEmailId(String emailId) throws PheonixException {
         return usersRepository.findByEmailId(emailId);
@@ -54,4 +56,5 @@ public class UsersDaoImpl implements UsersDao {
     public String getContextFromUserId(String userId) {
         return userContextRepository.getContextFromUserId(userId);
     }
+
 }

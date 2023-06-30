@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TypeDef;
@@ -20,14 +22,13 @@ import java.time.LocalDateTime;
  * @author Infinity97
  */
 
-@Data
+@Getter
+@Setter
 @MappedSuperclass
 @SuperBuilder
 @NoArgsConstructor
-@TypeDefs({
-  @TypeDef(name = "json", typeClass = JsonStringType.class),
-  @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-})
+@TypeDef(name = "json", typeClass = JsonStringType.class)
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public abstract class BaseEntity {
 
     @Column(name = "CREATED_AT", updatable = false)

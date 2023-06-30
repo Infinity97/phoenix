@@ -2,7 +2,7 @@ package com.pheonix.core.repository.dao;
 
 import com.pheonix.core.dto.ApiResponseStatus;
 import com.pheonix.core.model.GeneralFiles;
-import com.pheonix.core.repository.IGeneralFilesRepo;
+import com.pheonix.core.repository.GeneralFilesRepo;
 import com.pheonix.core.utils.enums.FileType;
 import com.pheonix.core.utils.exception.PheonixException;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GeneralFilesDao {
 
-	private final IGeneralFilesRepo filesRepo;
+	private final GeneralFilesRepo filesRepo;
 
 	public GeneralFiles save(GeneralFiles generalFiles){
 		return filesRepo.save(generalFiles);

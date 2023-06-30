@@ -25,6 +25,7 @@ import java.util.List;
 import static com.pheonix.user.management.utils.constants.rest.RestContants.LOGIN.AUTH;
 import static com.pheonix.user.management.utils.constants.rest.RestContants.PAGE_NO;
 import static com.pheonix.user.management.utils.constants.rest.RestContants.PAGE_SIZE;
+import static com.pheonix.user.management.utils.constants.rest.RestContants.USER.USER_ID;
 
 @Slf4j
 @RestController
@@ -80,10 +81,16 @@ public class UserController {
 																														 @RequestParam(name = PAGE_SIZE, defaultValue = "10", required = false) @Min(value = 1, message = ErrorConstants.PAGE_SIZE_VALIDATION) int pageSize,
 																														 @RequestParam(name = PAGE_NO, defaultValue = "0", required = false) @Min(value = 0, message = ErrorConstants.PAGE_NUMBER_VALIDATION) int pageNumber)throws PheonixException{
 
-		PagingRequest pagingRequest = new PagingRequest();
+		PagingRequest<Void> pagingRequest = new PagingRequest<>();
 		pagingRequest.setPageNumber(pageNumber);
 		pagingRequest.setPageSize(pageSize);
 		return new ResponseEntity<>(new ApiResponse<>(ApiResponseStatus.SUCCESS,userService.getLiveFriendsOfUser(pagingRequest)),HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/" +  "{"+ USER_ID + "}")
+	public ResponseEntity<ApiResponse<UserResponse>> getUserDetails(@RequestHeader(name = RestContants.SESSION_ID) String sessionId,
+																																	@PathVariable(name = USER_ID) String userId) throws PheonixException{
+		return new ResponseEntity<>(new ApiResponse<>(ApiResponseStatus.SUCCESS,userService.getUserInfo(userId)), HttpStatus.OK);
 	}
 
 }

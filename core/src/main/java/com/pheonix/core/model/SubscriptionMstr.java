@@ -4,7 +4,9 @@ import com.pheonix.core.utils.enums.SubscriptionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
@@ -16,8 +18,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+
+@Getter
+@Setter
 @Entity(name = "SUBSCRIPTION_MSTR")
 @Table(name = "SUBSCRIPTION_MSTR")
 @SuperBuilder
@@ -37,4 +40,9 @@ public class SubscriptionMstr extends BaseEntity{
 	@Enumerated(value = EnumType.STRING)
 	private SubscriptionType subscriptionType;
 
+	/**
+	 * Cumulative average rating provided by all the customers.
+	 */
+	@Column(name = "RATINGS")
+	private Double ratings;
 }

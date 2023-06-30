@@ -5,8 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.pheonix.core.dto.BasePojo;
 import com.pheonix.core.dto.response.FileTypeResponse;
 import com.pheonix.core.utils.enums.DeviceStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import net.bytebuddy.implementation.bind.annotation.Super;
 
 import java.util.List;
 
@@ -14,6 +18,9 @@ import java.util.List;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DeviceVo extends BasePojo {
 	private String deviceId;
 	private String name;

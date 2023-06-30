@@ -9,8 +9,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "GENERAL_FILES")
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

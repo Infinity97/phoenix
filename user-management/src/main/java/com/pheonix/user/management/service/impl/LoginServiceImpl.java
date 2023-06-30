@@ -9,6 +9,7 @@ import com.pheonix.user.management.dto.response.UserResponse;
 import com.pheonix.user.management.model.UserAuthSession;
 import com.pheonix.user.management.model.Users;
 import com.pheonix.user.management.dao.UsersDao;
+import com.pheonix.user.management.service.AsyncService;
 import com.pheonix.user.management.service.ILoginService;
 import com.pheonix.user.management.service.IUserService;
 import com.pheonix.user.management.utils.constants.enums.UserStatus;
@@ -31,6 +32,7 @@ public class LoginServiceImpl implements ILoginService {
 	private final IUserService userService;
 	private final ObjectMapper objectMapper;
 	private final Provider<UserSessionVO> userSessionVOProvider;
+	private final AsyncService asyncService;
 
 	@Override
 	@Transactional(rollbackOn = Exception.class)
@@ -39,6 +41,7 @@ public class LoginServiceImpl implements ILoginService {
 
 			Users users = userService.createUser(userRequest);
 			userService.mapUserWithContext(users,users.getId(), userRequest.getUserType());
+			asyncService.mapNewlyCreatedUserToFriends(users);
 
 			return userService.createSession(users);
 	}
@@ -64,7 +67,7 @@ public class LoginServiceImpl implements ILoginService {
 		try {
 		 userAuthSession = userService.getValidSession(userRequest);
 		}catch (PheonixException pheonixException){
-			if(pheonixException.getStatus()!= ApiResponseStatus.INCORRECT_PASSWORD)
+			if(pheonixException.getStatus() == ApiResponseStatus.INCORRECT_PASSWORD)
 				throw pheonixException;
 			userAuthSession = signUp(userRequest);
 		}
