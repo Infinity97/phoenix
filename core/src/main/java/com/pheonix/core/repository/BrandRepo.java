@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface BrandRepo extends PagingAndSortingRepository<Brand,Long> {
 	Optional<Brand> findByName(String name);
 	Page<Brand> findAllByDeleted(Boolean deleted, Pageable pageable);
+	Page<Brand> findAllByDeletedV2(Boolean deleted, Pageable pageable);
 }
