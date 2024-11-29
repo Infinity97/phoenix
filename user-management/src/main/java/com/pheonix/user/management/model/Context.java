@@ -21,6 +21,12 @@ public class Context extends BaseEntity implements java.io.Serializable {
     @Column(name = "ID", columnDefinition = "VARCHAR(255)", unique = true, nullable = false)
     private String id;
 
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(name = "ID", columnDefinition = "VARCHAR(255)", unique = true, nullable = false)
+    private String id;
+
      @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
