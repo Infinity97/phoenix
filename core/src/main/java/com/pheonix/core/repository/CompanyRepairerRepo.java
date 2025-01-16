@@ -12,6 +12,8 @@ public interface CompanyRepairerRepo extends JpaRepository<CompanyRepairers, Str
 	Page<CompanyRepairers> findByBrand_IdAndDeleted(Long id, boolean deleted, Pageable pageable);
 		Page<CompanyRepairers> findByBrand_IdAndDeleted(Long id, boolean deleted, Pageable pageable);
 
+			Page<CompanyRepairers> findByBrand_IdAndDeleted(Long id, boolean deleted, Pageable pageable);
+
 	Page<CompanyRepairers> findByBrand_IdAndDeleted(Long id, boolean deleted, Pageable pageable);
 	Page<CompanyRepairers> findByBrand_IdAndDeleted(Long id, boolean deleted, Pageable pageable);
 
