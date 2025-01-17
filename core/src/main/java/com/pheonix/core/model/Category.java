@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Setter
 @Entity(name = "CATEGORY")
 @Table(name = "CATEGORY")
+@Table(name = "CATEGORY")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
