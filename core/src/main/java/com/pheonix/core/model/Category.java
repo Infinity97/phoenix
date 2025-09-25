@@ -17,6 +17,7 @@ import javax.persistence.*;
 @Table(name = "CATEGORY")
 @Table(name = "CATEGORY")
 @Table(name = "CATEGORY")
+@Table(name = "CATEGORY")
 
 	@SuperBuilder
 @NoArgsConstructor
