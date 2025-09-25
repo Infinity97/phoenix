@@ -25,6 +25,7 @@ import static com.pheonix.user.management.utils.constants.rest.RestContants.LOGI
 @Slf4j
 @RestController
 @RequestMapping(value = RestContants.LOGIN.LOGIN)
+@RequestMapping(value = RestContants.LOGIN.LOGIN)
 @RequiredArgsConstructor
 public class LoginController {
 
