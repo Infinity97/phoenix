@@ -16,6 +16,7 @@ import java.util.List;
 public class PagingResponse<T> {
 	private List<T> values;
 	private List<T> values;
+	private List<T> values;
 	private Integer noOfPages;
 	private Integer pageNumber;
 	private Long totalNumberOfElements;
