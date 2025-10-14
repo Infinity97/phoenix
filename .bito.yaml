@@ -1,5 +1,5 @@
 suggestion_mode: comprehensive
-post_description: value
+post_description: false
 post_changelist: false
 include_source_branches: feature/**,bugfix/**
 include_target_branches: main,develop
