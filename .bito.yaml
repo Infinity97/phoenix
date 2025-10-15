@@ -8,7 +8,7 @@ custom_guidelines:
       path: ""
 dependency-check-enabled: true
 exclude_draft_pr: false
-exclude_files: "*.xml, *.json, *.properties, .gitignore, *.yml, *.md"
+exclude_files: '*.xml,*.json,*.properties,.gitignore,*.yml,*.md'
 include_source_branches: "gauri-test-1"
 include_target_branches: "feature/**,bugfix/**"
 linters_feedback: true
