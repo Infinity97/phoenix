@@ -1,22 +1,18 @@
-suggestion_mode: comprehensive
-post_description: true
-post_changelist: true
-include_source_branches: feature/**,bugfix/**
-include_target_branches: main,develop
-exclude_files: docs/**,README.md
-exclude_draft_pr: true
-secret_scanner_feedback: true
-linters_feedback: true
-dependency-check-enabled: true
-jira_project_keys: PROJ
 custom_guidelines:
   general:
-    - name: "Global Checks"
-      path: "/guidelines/global_checks.txt"
+    - name: ""
+      path: ""
   per_language:
     java:
-      name: "Java Coding Standards"
-      path: "/guidelines/java.txt"
-    python:
-      name: "Python Guideline"
-      path: "/guidelines/ptyhon-guideline.txt"
+      name: ""
+      path: ""
+dependency-check-enabled: true
+exclude_draft_pr: false
+exclude_files: "*.xml, *.json, *.properties, .gitignore, *.yml, *.md"
+include_source_branches: "gauri-test-1"
+include_target_branches: "feature/**,bugfix/**"
+linters_feedback: true
+post_changelist: true
+post_description: true
+secret_scanner_feedback: true
+suggestion_mode: comprehensive
