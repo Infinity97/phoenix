@@ -16,4 +16,4 @@ custom_guidelines:
   per_language:
     java:
       name: "Java Coding Standards"
-      Path: "/guidelines/java.txt"
+      path: "/guidelines/java.txt"
