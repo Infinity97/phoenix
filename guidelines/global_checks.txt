@@ -1,0 +1,1 @@
+Ensure that all Null Pointer Exceptions are caught as expected
