@@ -17,3 +17,6 @@ custom_guidelines:
     java:
       name: "Java Coding Standards"
       path: "/guidelines/java.txt"
+    python:
+      name: "Python Guideline"
+      path: "/guidelines/ptyhon-guideline.txt"
