@@ -10,10 +10,10 @@ custom_guidelines:
   per_language:
     python:
       name: "Python Guideline"
-      path: "/python-guideline.txt"
+      path: "/guidelines/ptyhon-guideline.txt"
     java:  
       name: "Java Guideline"
-      path: "/java.txt"
+      path: "/guidelines/java.txt"
 
 # Run Depenency Check analysis during code reviews. Valid values :- true or false
 dependency_check.enabled: true
