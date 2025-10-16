@@ -1,1 +1,1 @@
-Ensure that all Null Pointer Exceptions are caught as expected
+Ensure that all Null Pointer Exceptions are caught. Give me proper understanding of the issue and be very critical in tone that such a trivial issue was not fixed
