@@ -1,17 +1,49 @@
+# Repo Configuration Files are named .bito.yaml and needs to be placed in the default branch of your repository.
+# For more information please visit https://docs.bito.ai/ai-code-reviews-in-git/overview 
+
+
+# Path reference to the specific guidelines that you want bito to follow as located in your source branch
 custom_guidelines:
   general:
-    - name: ""
-      path: ""
+    - name: "Global NPE CHeck"
+      path: "/guidelines/global_checks.txt"
   per_language:
-    java:
-      name: ""
-      path: ""
-exclude_draft_pr: false
-exclude_files: '*.xml,*.json,*.properties,.gitignore,*.yml,*.md'
-include_source_branches: "*"
+    python:
+      name: "Python Guideline"
+      path: "/python-guideline.txt"
+    java:  
+      name: "Java Guideline"
+      path: "/java.txt"
+
+# Run Depenency Check analysis during code reviews. Valid values :- true or false
+dependency_check.enabled: true
+
+# Exclude draft prs from being reviewed automatically. Valid values :- true or false
+exclude_draft_pr: true
+
+# Comma separated regex patterns of file paths to remove from code reviews. For eg:- "*.md, *.yaml, config"
+exclude_files: "*.xml, *.json, *.properties, .gitignore, *.yml, *.md"
+
+# Comma separated regex patterns which should match with the source branch for automatic code reviews. For eg:- "feature.*, release.*, main"
+include_source_branches: "*, main, master"
+
+# Comma separated regex patterns which should match with the target branch for automatic code reviews. For eg:- "feature.*, release.*, main"
 include_target_branches: "*"
+
+# Run Linting tools during code reviews. Valid values :- true or false
 linters_feedback: true
+
+# Automatically creates a table of all changes and files that the specific change was implemented for. Valid values :- true or false
 post_changelist: true
+
+# Include overall summary in PR comment. Valid values :- true or false
 post_description: true
+
+# Run Secrent Scanning tools during code reviews. Valid values :- true or false
 secret_scanner_feedback: true
-suggestion_mode: comprehensive
+
+# Run Static Analysis tools during code reviews for providing better feedback. Valid values :- true or false
+static_analysis.fb_infer.enabled: true
+
+# Controls verbosity of review feedback. In Essential mode, only critical issues are posted. In Comprehensive mode minor suggestions are also identified. Valid values :- essential, comprehensive
+suggestion_mode: "essential"
