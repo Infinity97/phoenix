@@ -6,7 +6,6 @@ custom_guidelines:
     java:
       name: ""
       path: ""
-dependency-check-enabled: true
 exclude_draft_pr: false
 exclude_files: '*.xml,*.json,*.properties,.gitignore,*.yml,*.md'
 include_source_branches: "gauri-test-1"
