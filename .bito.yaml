@@ -1,7 +1,7 @@
 custom_guidelines:
   general:
-    - name: ""
-      path: ""
+    - name: "Global Checks Guidelines"
+      path: "/guidelines/global_checks.txt"
   per_language:
     java:
       name: "Java guideline valid -1 "
