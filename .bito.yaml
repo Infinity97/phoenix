@@ -1,49 +1,26 @@
-# Repo Configuration Files are named .bito.yaml and needs to be placed in the default branch of your repository.
-# For more information please visit https://docs.bito.ai/ai-code-reviews-in-git/overview 
-
-
-# Path reference to the specific guidelines that you want bito to follow as located in your source branch
 custom_guidelines:
   general:
-    - name: "Global NPE CHeck"
-      path: "/guidelines/global_checks.txt"
+    - name: ""
+      path: ""
   per_language:
+    java:
+      name: "Java guideline valid -1 "
+      path: "java_guidelines.rtf"
     python:
-      name: "Python Guideline"
-      path: "/guidelines/ptyhon-guideline.txt"
-    java:  
-      name: "Java Guideline"
-      path: "/guidelines/java.txt"
-
-# Run Depenency Check analysis during code reviews. Valid values :- true or false
-dependency_check.enabled: true
-
-# Exclude draft prs from being reviewed automatically. Valid values :- true or false
-exclude_draft_pr: true
-
-# Comma separated regex patterns of file paths to remove from code reviews. For eg:- "*.md, *.yaml, config"
-exclude_files: "*.xml, *.json, *.properties, .gitignore, *.yml, *.md"
-
-# Comma separated regex patterns which should match with the source branch for automatic code reviews. For eg:- "feature.*, release.*, main"
-include_source_branches: "*, main, master"
-
-# Comma separated regex patterns which should match with the target branch for automatic code reviews. For eg:- "feature.*, release.*, main"
+      name: "Python error_rules guideline"
+      path: "guidelines/error_rules.txt"
+      name: "Python function_rules guideline"
+      path: "guidelines/function_rules.txt"
+    python:
+      name: "Python naming_rules guideline"
+      path: "guidelines/naming_rules.txt"
+dependency_check.enabled: yes
+exclude_draft_pr: false
+exclude_files: "*.xml, *.json, *.properties, .gitignore, *.yml, *.md, *.pdf, *.txt, *.doc"
+include_source_branches: "*"
 include_target_branches: "*"
-
-# Run Linting tools during code reviews. Valid values :- true or false
-linters_feedback: true
-
-# Automatically creates a table of all changes and files that the specific change was implemented for. Valid values :- true or false
+linters_feedback: yes
 post_changelist: true
-
-# Include overall summary in PR comment. Valid values :- true or false
-post_description: true
-
-# Run Secrent Scanning tools during code reviews. Valid values :- true or false
-secret_scanner_feedback: true
-
-# Run Static Analysis tools during code reviews for providing better feedback. Valid values :- true or false
-static_analysis.fb_infer.enabled: true
-
-# Controls verbosity of review feedback. In Essential mode, only critical issues are posted. In Comprehensive mode minor suggestions are also identified. Valid values :- essential, comprehensive
-suggestion_mode: "essential"
+post_description: false
+secret_scanner_feedback: false
+suggestion_mode: comprehensive
