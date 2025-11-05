@@ -1,19 +1,60 @@
-suggestion_mode: comprehensive
-post_description: true
-post_changelist: true
-include_source_branches: feature/**,bugfix/**
-include_target_branches: main,develop
-exclude_files: docs/**,README.md
-exclude_draft_pr: true
-secret_scanner_feedback: true
-linters_feedback: true
-dependency-check-enabled: true
-jira_project_keys: PROJ
+# Repo Configuration Files are named .bito.yaml and needs to be placed in the default branch of your repository.
+# For more information please visit  
+
+
+# Name and path to review guidelines that you want bito to follow. \nThese files must exist in your source branch at review time. \nWe accept upto 3 general guidelines and 1 language specific guideline per language.
 custom_guidelines:
   general:
-    - name: "Global Checks"
-      path: "/guidelines/global_checks.txt"
+    - name: "code review checklist"
+      path: "/Customguideline/code_review _checklist.pdf"
   per_language:
-    java:
-      name: "Java Coding Standards"
-      Path: "/guidelines/java.txt"
+    objective_C:
+      name: "objective_C Coding Standards"
+      path: "/Customguideline/objective_C.txt"
+    javascript:  
+      name: "javascript"
+      path: "/Customguideline/javascript.asc"
+    typescript:  
+      name: "typescript repo level"
+      path: "/Customguideline/typescript.log"
+    python:  
+      name: "Python repo level "
+      path: "/Customguideline/python_without_extension"  
+    md:
+      name: "Markdown repo level "
+      path: "/Customguideline/markdown.md" 
+
+# Run Depenency Check analysis during code reviews. Valid values :- true or false
+dependency_check.enabled: true
+
+# Exclude draft prs from being reviewed automatically. Valid values :- true or false
+exclude_draft_pr: true
+
+auto_reviews: ""
+
+# Comma separated regex patterns of file paths to remove from code reviews. For eg:- "*.md, *.yaml, config"
+exclude_files: "*.xml, *.json, *.properties, .gitignore, *.yml, *.js"
+
+# Comma separated regex patterns which should match with the source branch for automatic code reviews. For eg:- "feature.*, release.*, main"
+include_source_branches: "*"
+
+# Comma separated regex patterns which should match with the target branch for automatic code reviews. For eg:- "feature.*, release.*, main"
+include_target_branches: "*"
+
+# Run Linting tools during code reviews. Valid values :- true or false
+linters_feedback: true
+
+# Automatically creates a table of all changes and files that the specific change was implemented for. Valid values :- true or false
+post_changelist: true
+
+# Include overall summary in PR comment. Valid values :- true or false
+post_description: true
+
+# Run Secrent Scanning tools during code reviews. Valid values :- true or false
+secret_scanner_feedback: true
+
+# Run Static Analysis tools during code reviews for providing better feedback. Valid values :- true or false
+static_analysis.fb_infer.enabled: true
+
+# Controls verbosity of review feedback. In Essential mode, only critical issues are posted. In Comprehensive mode minor suggestions are also identified. Valid values :- essential, comprehensive
+suggestion_mode: "essential"
