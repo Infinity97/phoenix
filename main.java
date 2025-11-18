@@ -1,5 +1,17 @@
 public class BinarySearchIterative {
     public static int binarySearch(int[] arr, int target) {
+        // Input validation
+        if (arr == null) {
+            throw new IllegalArgumentException("Array cannot be null");
+        }
+        
+        // Check if array is sorted
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < arr[i-1]) {
+                throw new IllegalArgumentException("Array must be sorted in ascending order");
+            }
+        }
+        
         int left = 0, right = arr.length - 1;
 
         while (left <= right) {
