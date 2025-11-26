@@ -30,8 +30,6 @@ dependency_check.enabled: true
 # Exclude draft prs from being reviewed automatically. Valid values :- true or false
 exclude_draft_pr: true
 
-auto_reviews: ""
-
 # Comma separated regex patterns of file paths to remove from code reviews. For eg:- "*.md, *.yaml, config"
 exclude_files: "*.xml, *.json, *.properties, .gitignore, *.yml, *.js"
 
