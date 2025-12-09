@@ -1,11 +1,7 @@
 custom_guidelines:
   general:
-    - name: ""
-      path: ""
-  per_language:
-    java:
-      name: ""
-      path: ""
+    - name: "devops-guidelines"
+      path: "guidelines/devops.html"
 exclude_draft_pr: false
 exclude_files: '*.xml,*.json,*.properties,.gitignore,*.yml,*.md'
 include_source_branches: "*"
