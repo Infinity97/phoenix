@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevOps & CI/CD Guidelines ✅</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+    h1, h2 { color: #333; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    code { font-family: Consolas, monospace; }
+    ul { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <h1>DevOps & CI/CD Guidelines ✅</h1>
+  <p>These guidelines help ensure reliable, secure, and efficient software delivery pipelines across environments.</p>
+
+  <h2>1. Version Control ✅</h2>
+  <ul>
+    <li>Use Git or a distributed VCS.</li>
+    <li>Enforce branch naming conventions (e.g., <code>feature/login</code>, <code>bugfix/api-timeout</code>).</li>
+    <li>Protect main branches with pull request reviews and CI checks.</li>
+  </ul>
+  <pre><code># Example Git command to create a feature branch
+git checkout -b feature/user-auth
+</code></pre>
+
+  <h2>2. Continuous Integration (CI) ⚠️</h2>
+  <ul>
+    <li>Automate builds and tests on every commit.</li>
+    <li>Fail fast: stop pipeline on first critical error.</li>
+    <li>Use caching to speed up builds.</li>
+  </ul>
+  <pre><code># Sample GitHub Actions CI workflow
+name: CI Pipeline
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+</code></pre>
+
+  <h2>3. Continuous Delivery/Deployment (CD) ✅</h2>
+  <ul>
+    <li>Automate deployment to staging and production.</li>
+    <li>Use environment-specific configs and secrets.</li>
+    <li>Implement rollback strategies for failed deployments.</li>
+  </ul>
+  <pre><code># Example deployment script
+kubectl apply -f deployment.yaml
+</code></pre>
+
+  <h2>4. Infrastructure as Code (IaC) ❌</h2>
+  <ul>
+    <li>Use tools like Terraform, Pulumi, or CloudFormation.</li>
+    <li>Store IaC in version control.</li>
+    <li>Validate and lint IaC before applying.</li>
+  </ul>
+  <pre><code># Terraform example
+resource "aws_instance" "web" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+}
+</code></pre>
+
+  <h2>5. Monitoring & Logging ⚠️</h2>
+  <ul>
+    <li>Integrate monitoring tools (e.g., Prometheus, Grafana).</li>
+    <li>Centralize logs with ELK or similar stacks.</li>
+    <li>Set up alerts for failures and anomalies.</li>
+  </ul>
+  <pre><code>{
+  "level": "error",
+  "message": "Deployment failed",
+  "timestamp": "2025-10-17T13:15:00Z"
+}
+</code></pre>
+
+  <h2>6. Secrets Management ❌</h2>
+  <ul>
+    <li>Never hardcode secrets in code or config files.</li>
+    <li>Use vaults or environment variables.</li>
+    <li>Rotate secrets regularly.</li>
+  </ul>
+  <pre><code># Example of loading secrets securely
+export DB_PASSWORD=$(vault read -field=password secret/db)
+</code></pre>
+
+  <h2>7. Unicode Support ✅</h2>
+  <ul>
+    <li>Ensure pipelines and tools support Unicode: 中文测试</li>
+    <li>Validate encoding across environments.</li>
+    <li>Avoid assumptions about character sets in logs and configs.</li>
+  </ul>
+
+  <h2>8. Pipeline Hygiene ✅</h2>
+  <ul>
+    <li>Keep pipelines fast and focused.</li>
+    <li>Remove unused steps and legacy scripts.</li>
+    <li>Document pipeline logic and dependencies.</li>
+  </ul>
+
+  <h2>9. Security Scanning ⚠️</h2>
+  <ul>
+    <li>Integrate SAST and DAST tools.</li>
+    <li>Scan dependencies for known vulnerabilities.</li>
+    <li>Fail builds on critical security issues.</li>
+  </ul>
+
+  <h2>10. Documentation & Audit Trails ✅</h2>
+  <ul>
+    <li>Document pipeline steps and deployment processes.</li>
+    <li>Maintain audit logs for changes and deployments.</li>
+    <li>Use changelogs and release notes for transparency.</li>
+  </ul>
+
+  <p><strong>End of Guidelines</strong></p>
+
+</body>
+</html>
