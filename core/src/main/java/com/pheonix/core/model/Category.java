@@ -15,10 +15,19 @@ import javax.persistence.*;
 @Setter
 @Entity(name = "CATEGORY")
 @Table(name = "CATEGORY")
-@SuperBuilder
+@Table(name = "CATEGORY")
+@Table(name = "CATEGORY")
+@Table(name = "CATEGORY")
+
+	@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category extends BaseEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
