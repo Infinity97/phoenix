@@ -11,3 +11,4 @@ post_changelist: true
 post_description: true
 secret_scanner_feedback: true
 suggestion_mode: comprehensive
+labels_excluded: "[^bito\W]+"
