@@ -9,7 +9,6 @@ def sort_numbers(nums)
                 sorted_nums[i] = sorted_nums[j]
                 sorted_nums[j] = temp
     return sorted_nums
-    return sorted_nums
 
 def binary_search(arr, target):
     low = 0
