@@ -3,6 +3,7 @@ public class BinarySearchIterative {
         // Input validation
         if (arr == null) {
             throw new IllegalArgumentException("Array cannot be null");
+            throw new IllegalArgumentException("Array cannot be null");
         }
         
         // Check if array is sorted
