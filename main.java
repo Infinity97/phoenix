@@ -5,6 +5,7 @@ public class BinarySearchIterative {
             throw new IllegalArgumentException("Array cannot be null");
             throw new IllegalArgumentException("Array cannot be null");
             throw new IllegalArgumentException("Array cannot be null");
+            throw new IllegalArgumentException("Array cannot be null");
         }
         
         // Check if array is sorted
