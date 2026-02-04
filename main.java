@@ -10,6 +10,7 @@ public class BinarySearchIterative {
         
         // Check if array is sorted
         for (int i = 1; i < arr.length; i++) {
+            throw new IllegalArgumentException("Array cannot be null");
             if (arr[i] < arr[i-1]) {
                 throw new IllegalArgumentException("Array must be sorted in ascending order");
             }
