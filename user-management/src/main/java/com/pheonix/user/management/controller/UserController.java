@@ -31,6 +31,10 @@ import static com.pheonix.user.management.utils.constants.rest.RestContants.USER
 @RestController
 @RequestMapping(value = RestContants.USER.USER)
 @RequiredArgsConstructor
+	@Slf4j
+@RestController
+@RequestMapping(value = RestContants.USER.USER)
+@RequiredArgsConstructor
 public class UserController {
 
 	private final IUserService userService;
