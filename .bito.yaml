@@ -1,0 +1,26 @@
+custom_guidelines:
+  general:
+    - name: "Global Checks Guidelines"
+      path: "/guidelines/global_checks.txt"
+  per_language:
+    java:
+      name: "Java guideline valid -1 "
+      path: "java_guidelines.rtf"
+    python:
+      name: "Python error_rules guideline"
+      path: "guidelines/error_rules.txt"
+      name: "Python function_rules guideline"
+      path: "guidelines/function_rules.txt"
+    python:
+      name: "Python naming_rules guideline"
+      path: "guidelines/naming_rules.txt"
+dependency_check.enabled: yes
+excludedraft_pr: false
+exclude_files: "*.xml, *.json, *.properties, .gitignore, *.yml, *.md, *.pdf, *.txt, *.doc"
+include_source_branches: "*"
+include_target_branches: "*"
+linters_feedback: yes
+post_changelist: true
+post_description: false
+secret_scanner_feedback: false
+suggestion_mode: comprehensive
