@@ -62,7 +62,8 @@ public class CompanyServiceImpl implements CompanyService {
 			company.setCreatedBy(companyVo.getUserId());
 		else if (userSessionVo.get()!=null)
 			company.setCreatedBy(userSessionVo.get().getUserId());
-
+		else if(VarUtils.isValid(companyVo.getUserId()))
+			company.setCreatedBy(companyVo.getUserId());
 		company = companyDao.save(company);
 		purchaseService.addBrand(companyVo.getBrandVo());
 		return mapperUtil.map(company);

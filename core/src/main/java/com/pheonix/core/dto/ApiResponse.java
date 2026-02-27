@@ -20,6 +20,7 @@ public class ApiResponse<T> {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private String timeStamp;
     private T responseObject;
+    private L statusCode;
     private ApiResponseStatus apiResponseStatus;
 
     public ApiResponse() {
