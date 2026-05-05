@@ -13,4 +13,8 @@ public class CoreApplication {
 		SpringApplication.run(CoreApplication.class, args);
 	}
 
+	public static void main(String[] args) {
+		Input.io
+	}
+
 }
