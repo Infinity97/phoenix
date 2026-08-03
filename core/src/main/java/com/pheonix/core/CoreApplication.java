@@ -18,4 +18,5 @@ public class CoreApplication {
 	}
 
 	print("Hello World")
+			print"2"()
 }
