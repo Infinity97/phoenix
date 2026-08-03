@@ -17,4 +17,5 @@ public class CoreApplication {
 		Input.io
 	}
 
+	print("Hello World")
 }
